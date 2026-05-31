@@ -1,0 +1,45 @@
+body {
+  background-color: var(--twins-bg-primary);
+  color: var(--twins-text-primary);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.panel-card {
+  background-color: var(--twins-bg-panel);
+  border: 1px solid var(--twins-border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.panel-card h2 {
+  color: var(--twins-text-primary);
+  border-bottom: 2px solid var(--twins-accent-silver); /* Subtle silver accent */
+  padding-bottom: 10px;
+}
+
+.subtle-text {
+  color: var(--twins-text-subtle);
+}
+
+.active-status {
+  color: var(--twins-accent-red);
+  font-weight: bold;
+}
+
+.btn-check-in {
+  background-color: var(--twins-button-bg);
+  color: var(--twins-button-text);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-check-in:hover {
+  background-color: #8b0000; /* A slightly darker red for hover */
+}

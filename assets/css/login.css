@@ -1,0 +1,328 @@
+
+/* Core Color Variables, Background Image, and Gloss Effects */
+:root {
+    /* **BACKGROUND ADJUSTMENT** */
+    --twins-bg-image: url('../image/bg.jpg'); /* Spotlight background image from input */
+    --twins-bg-fallback: #121213;    /* Deep charcoal (fallback) */
+    
+    /* **PANEL ADJUSTMENT (Deeper, potentially richer for gloss base)** */
+    --twins-bg-panel: #1e1c1e;      /* Dark charcoal panel */
+    
+    --twins-text-primary: #e2ded9;  /* Warm light gray */
+    --twins-text-subtle: #a79a8c;   /* Warm muted taupe */
+    
+    /* **BORDER TWEAK (Slightly more defined and polished)** */
+    --twins-border: #3d3836;        /* Charcoal border */
+    
+    --twins-accent-red: #b1322c;    /* Burnt brick */
+    --twins-accent-silver: #d1c7be; /* Warm silver */
+    
+    /* **GLOSS VARIABLES** */
+    --twins-gloss-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
+    --twins-gloss-highlight: rgba(255, 255, 255, 0.05); /* Very subtle internal highlights */
+
+    /* Layout helpers */
+    --twins-panel-max-width: 520px;
+    --twins-panel-padding: 56px;
+}
+
+/* Global Reset & Body Styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--twins-bg-fallback);
+    color: var(--twins-text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+}
+
+/* Split layout: left login, right image */
+.page-split {
+    display: grid;
+    grid-template-columns: minmax(320px, 48%) 1fr;
+    min-height: 100vh;
+}
+
+.login-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--twins-panel-padding);
+    background: linear-gradient(180deg, #1b1a1c 0%, #111112 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -18%;
+    width: 38%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(177, 50, 44, 0) 0%, rgba(177, 50, 44, 0.18) 50%, rgba(177, 50, 44, 0) 100%);
+    pointer-events: none;
+}
+
+.image-panel {
+    position: relative;
+    background-image: var(--twins-bg-image);
+    background-color: var(--twins-bg-fallback);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.image-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(177, 50, 44, 0.14) 0%, rgba(177, 50, 44, 0.06) 35%, rgba(0, 0, 0, 0) 65%);
+    pointer-events: none;
+}
+
+.image-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(165, 28, 48, 0.25), transparent 55%),
+                linear-gradient(120deg, rgba(16, 10, 6, 0.5) 0%, rgba(16, 10, 6, 0.2) 60%, rgba(16, 10, 6, 0.6) 100%);
+}
+
+/* Login Card Container - Enhanced for Gloss Effect */
+.login-wrapper {
+    background-color: rgba(30, 28, 30, 0.86);
+    border: 1px solid var(--twins-border);
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: var(--twins-panel-max-width);
+    /* **ENHANCED SHADOWS & PSEUDO-ELEMENTS FOR GLOSS** */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), /* Existing shadow enhanced */
+                0 0 1px 1px var(--twins-border), /* Distinct border outline */
+                inset 0 1px 3px rgba(255, 255, 255, 0.1), /* Subtle top inset glow */
+                inset 0 0 10px rgba(0, 0, 0, 0.2); /* Internal depth */
+    position: relative;
+    overflow: hidden;
+}
+
+/* **GLOSSY PSEUDO-ELEMENT SHEEN** */
+.login-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%; /* Sheen on the upper half */
+    background: var(--twins-gloss-sheen);
+    border-radius: 12px 12px 0 0; /* Match corner radius of container top */
+    pointer-events: none; /* Let clicks pass through to form elements */
+    z-index: 1; /* Place above background, but below actual content */
+}
+
+/* **SUBTLE INTERNAL HIGHLIGHT PSEUDO-ELEMENT** */
+.login-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 2px; /* Very subtle internal rim light */
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border: 1px solid var(--twins-gloss-highlight);
+    border-radius: 10px; /* Sightly smaller for inset look */
+    pointer-events: none;
+    z-index: 0; /* Below content and before element sheen */
+}
+
+/* Brand header content must be positioned relative for z-indexing above sheen */
+.brand-header {
+    position: relative;
+    z-index: 2; /* Position above glossy sheen */
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.brand-header h1 {
+    color: var(--twins-accent-silver);
+    font-size: 2.2rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-style: italic;
+    font-weight: 800;
+}
+
+.brand-header p {
+    color: var(--twins-accent-red);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+/* Form content must be positioned relative for z-indexing above sheen */
+#frontendLoginForm {
+    position: relative;
+    z-index: 2; /* Position above glossy sheen */
+}
+
+/* Form Elements */
+.input-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--twins-text-primary);
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.input-control {
+    width: 100%;
+    padding: 14px 16px;
+    background-color: var(--twins-bg-fallback);
+    border: 1px solid var(--twins-border);
+    color: var(--twins-text-primary);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-control:focus {
+    outline: none;
+    border-color: var(--twins-accent-red);
+    box-shadow: 0 0 0 2px rgba(165, 28, 48, 0.2);
+}
+
+/* Button Styling - Positioned relative for z-indexing */
+.btn-submit {
+    position: relative;
+    z-index: 2; /* Position above glossy sheen */
+    width: 100%;
+    background-color: var(--twins-accent-red);
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #8b1526;
+}
+
+.btn-submit:active {
+    transform: scale(0.98);
+}
+
+/* Footer links - Positioned relative for z-indexing */
+.login-footer {
+    position: relative;
+    z-index: 2; /* Position above glossy sheen */
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.login-footer a {
+    color: var(--twins-text-subtle);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.login-footer a:hover {
+    color: var(--twins-accent-silver);
+}
+
+@media (max-width: 900px) {
+    .page-split {
+        grid-template-columns: 1fr;
+    }
+
+    .image-panel {
+        min-height: 38vh;
+        order: -1;
+    }
+
+    .login-panel {
+        padding: 40px 24px 56px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        background-image: var(--twins-bg-image);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+    }
+
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(10, 10, 11, 0.35) 0%, rgba(10, 10, 11, 0.65) 100%);
+        z-index: 0;
+    }
+
+    .page-split {
+        min-height: auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    .image-panel {
+        display: none;
+    }
+
+    .login-panel {
+        min-height: 100vh;
+        justify-content: center;
+        padding: 28px 18px 40px;
+        background: transparent;
+    }
+
+    .login-wrapper {
+        padding: 28px 22px;
+        border-radius: 10px;
+    }
+
+    .brand-header {
+        margin-bottom: 24px;
+    }
+
+    .brand-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .brand-header p {
+        font-size: 0.85rem;
+    }
+
+    .input-group {
+        margin-bottom: 18px;
+    }
+
+    .input-control {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+    }
+
+    .btn-submit {
+        padding: 13px;
+        font-size: 1rem;
+    }
+}

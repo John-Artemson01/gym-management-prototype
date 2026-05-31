@@ -1,0 +1,17 @@
+:root {
+  /* Main Brown Tones: Rich, deep, and warm */
+  --twins-bg-primary: #1a110a;    /* Deep Dark Espresso (Main background) */
+  --twins-bg-panel: #332314;      /* Rich Cocoa Brown (Panels and cards) */
+  --twins-text-primary: #d3d3d3;  /* Bright Light Silver (Primary text) */
+  --twins-text-subtle: #8e7c6d;   /* Muted Brown (Sub-text and descriptions) */
+  --twins-border: #4a3a2a;        /* Subtle divider lines */
+
+  /* Highlights: Silver and Crimson Red */
+  --twins-accent-red: #a51c30;    /* Deep Crimson (For active status, numbers, key buttons) */
+  --twins-accent-silver: #c0c0c0; /* Polished Silver (Logo, icons, specific highlights) */
+
+  /* Button and Interactive Elements */
+  --twins-button-bg: var(--twins-accent-red);
+  --twins-button-text: var(--twins-text-primary);
+  --twins-hover-bg: #4a3a2a;      /* Lighter brown on hover */
+}
