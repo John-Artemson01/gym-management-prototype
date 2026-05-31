@@ -27,7 +27,7 @@
                         <input type="password" id="password" name="password" class="input-control" placeholder="Enter your password" required>
                     </div>
 
-                    <button type="submit" class="btn-submit" id="loginBtn">Login</button>
+                    <button type="submit" class="btn-submit" id="loginBtn">Log In</button>
                 </form>
 
                 <div class="login-footer">
@@ -42,26 +42,30 @@
     </main>
 
     <script>
-        // Frontend interaction script
+        // Frontend-only login check
         document.getElementById('frontendLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent page reload since there's no backend
-            
+            e.preventDefault();
+
             const btn = document.getElementById('loginBtn');
             const originalText = btn.innerHTML;
-            
-            // Visual loading state
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
             btn.innerHTML = 'Authenticating...';
             btn.style.opacity = '0.8';
             btn.style.cursor = 'wait';
-            
-            // Simulate a brief delay, then "redirect" (or reset in this case)
+
             setTimeout(() => {
-                alert("Frontend Check: Form submitted successfully! (Backend integration pending)");
+                if (username === 'admin' && password === 'admin') {
+                    window.location.href = 'assets/modules/dashboard.html';
+                    return;
+                }
+
+                alert('Invalid credentials. Use admin / admin.');
                 btn.innerHTML = originalText;
                 btn.style.opacity = '1';
                 btn.style.cursor = 'pointer';
-                this.reset(); // Clear the form
-            }, 1200);
+            }, 600);
         });
     </script>
 
