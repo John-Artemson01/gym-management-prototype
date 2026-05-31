@@ -27,7 +27,7 @@
                         <input type="password" id="password" name="password" class="input-control" placeholder="Enter your password" required>
                     </div>
 
-                    <button type="submit" class="btn-submit" id="loginBtn">Access System</button>
+                    <button type="submit" class="btn-submit" id="loginBtn">Login</button>
                 </form>
 
                 <div class="login-footer">
