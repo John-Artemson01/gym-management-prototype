@@ -1,9 +1,15 @@
+/* 1. Global Box-Sizing Reset (Fixes the edge-touching issue) */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   background-color: var(--twins-bg-primary);
   color: var(--twins-text-primary);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .dashboard {
@@ -11,6 +17,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 32px 24px 48px;
+  min-width: 0;
 }
 
 .dashboard-layout {
@@ -18,6 +25,7 @@ body {
   grid-template-columns: 240px 1fr;
   min-height: 100vh;
   align-items: stretch;
+  width: 100%;
 }
 
 .sidebar {
@@ -89,10 +97,14 @@ body {
   font-size: 0.95rem;
 }
 
+/* 2. Adjusted Grid Container */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(200px, 1fr));
   gap: 20px;
+  min-width: 0;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .stat-card {
@@ -100,6 +112,8 @@ body {
   flex-direction: column;
   gap: 8px;
   min-height: 140px;
+  min-width: 0;
+  padding: 20px; /* Standardized padding */
 }
 
 .stat-label {
@@ -112,23 +126,48 @@ body {
 .stat-value {
   font-size: 2.2rem;
   font-weight: 700;
+  word-break: break-word;
 }
 
 .stat-meta {
   font-size: 0.9rem;
 }
 
+.stat-subline {
+  font-size: 0.9rem;
+}
+
+.stat-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--twins-text-subtle);
+}
+
+.stat-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.stat-list strong {
+  color: var(--twins-text-primary);
+  font-weight: 600;
+}
+
 .panel-card {
   background-color: var(--twins-bg-panel);
   border: 1px solid var(--twins-border);
   border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 20px; /* Removed redundant padding-inline */
 }
 
 .panel-card h2 {
   color: var(--twins-text-primary);
-  border-bottom: 2px solid var(--twins-accent-silver); /* Subtle silver accent */
+  border-bottom: 2px solid var(--twins-accent-silver); 
   padding-bottom: 10px;
 }
 
@@ -156,6 +195,8 @@ body {
   background-color: var(--twins-hover-bg);
 }
 
+/* --- Media Queries --- */
+
 @media (max-width: 1024px) {
   .dashboard-layout {
     grid-template-columns: 200px 1fr;
@@ -178,21 +219,29 @@ body {
     gap: 16px;
     border-right: none;
     border-bottom: 1px solid var(--twins-border);
+    position: sticky;
+    top: 0;
+    z-index: 5;
   }
 
   .sidebar-nav {
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    width: 100%;
   }
 
   .sidebar-link {
     padding: 8px 10px;
     font-size: 0.9rem;
+    white-space: nowrap;
   }
 
   .dashboard {
-    padding: 24px 16px 40px;
+    padding: 24px 16px 40px; /* Left/Right padding handles edge spacing natively now */
+    max-width: 100%;
   }
 
   .dashboard-header {
@@ -202,5 +251,50 @@ body {
 
   .stats-grid {
     grid-template-columns: 1fr;
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 430px) {
+  .dashboard {
+    padding: 18px 12px 28px;
+    max-width: 100%;
+  }
+
+  .sidebar {
+    padding: 16px 14px;
+    gap: 12px;
+  }
+
+  .sidebar-nav {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+
+  .sidebar-link {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+    white-space: normal;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .stat-card {
+    min-height: 0;
+  }
+
+  .stat-value {
+    font-size: 1.8rem;
+  }
+
+  .stat-list {
+    font-size: 0.8rem;
+  }
+
+  .panel-card {
+    padding: 16px;
   }
 }
