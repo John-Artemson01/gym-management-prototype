@@ -57,11 +57,17 @@
 
             setTimeout(() => {
                 if (username === 'admin' && password === 'admin') {
-                    window.location.href = 'assets/modules/dashboard.html';
+                    window.location.href = 'assets/modules/admin/dashboard.html';
+                    return;
+                } else if (username === 'employee' && password === 'employee') {
+                    window.location.href = 'assets/modules/employee/dashboard.html';
+                    return;
+                } else if (username === 'client' && password === 'client') {
+                    window.location.href = 'assets/modules/client/dashboard.html';
                     return;
                 }
 
-                alert('Invalid credentials. Use admin / admin.');
+                alert('Invalid credentials. Please try again.');
                 btn.innerHTML = originalText;
                 btn.style.opacity = '1';
                 btn.style.cursor = 'pointer';

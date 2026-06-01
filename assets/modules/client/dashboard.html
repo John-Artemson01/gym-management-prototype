@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twins Fitness | Member Portal</title>
+    <link rel="stylesheet" href="../../css/client.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Simplified Member Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>Twins</span>
+                <small>Fitness Club</small>
+            </div>
+            <nav class="sidebar-nav" aria-label="Main navigation">
+                <a class="sidebar-link is-active" href="#">My Dashboard</a>
+                <a class="sidebar-link" href="#">Membership Plan</a>
+                <a class="sidebar-link" href="#">Attendance History</a>
+                <a class="sidebar-link" href="#">Account Settings</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard">
+            <header class="dashboard-header">
+                <div>
+                    <h1>Welcome Back, John Artemson</h1>
+                    <p class="subtle-text">Here is your digital access and gym summary.</p>
+                </div>
+            </header>
+
+            <section class="member-grid">
+                
+                <!-- Digital QR Pass -->
+                <article class="panel-card digital-pass-card">
+                    <h2>Digital Access Pass</h2>
+                    <div class="qr-container">
+                        <!-- Placeholder QR Code Generator -->
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=TwinsFitness_JohnArtemson123&color=a51c30&bgcolor=d3d3d3" alt="Member QR Code">
+                    </div>
+                    <div class="pass-details">
+                        <div class="stat-label">Member ID</div>
+                        <div class="stat-value" style="font-size: 1.2rem;">TF-2026-8842</div>
+                        <p class="subtle-text mt-2">Scan this code at the front desk to log your attendance.</p>
+                    </div>
+                </article>
+
+                <!-- Membership Status -->
+                <article class="panel-card membership-status-card">
+                    <h2>Membership Status</h2>
+                    <div class="status-indicator">
+                        <span class="status-dot active"></span>
+                        <span class="active-status" style="font-size: 1.5rem;">ACTIVE</span>
+                    </div>
+                    
+                    <div class="membership-details">
+                        <div class="detail-row">
+                            <span class="subtle-text">Plan Type:</span>
+                            <strong>Annual VIP Access</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span class="subtle-text">Home Branch:</span>
+                            <strong>SJDM</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span class="subtle-text">Valid Until:</span>
+                            <strong>December 15, 2026</strong>
+                        </div>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="stat-label" style="margin-bottom: 5px;">Days Remaining: 198</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Attendance History -->
+                <article class="panel-card history-card">
+                    <h2>Recent Attendance</h2>
+                    <div class="table-responsive">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time In</th>
+                                    <th>Branch</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>June 1, 2026</td>
+                                    <td>06:15 PM</td>
+                                    <td>SJDM</td>
+                                    <td><span class="badge success">Verified</span></td>
+                                </tr>
+                                <tr>
+                                    <td>May 29, 2026</td>
+                                    <td>05:30 PM</td>
+                                    <td>Novaliches</td>
+                                    <td><span class="badge success">Verified</span></td>
+                                </tr>
+                                <tr>
+                                    <td>May 27, 2026</td>
+                                    <td>06:00 PM</td>
+                                    <td>SJDM</td>
+                                    <td><span class="badge success">Verified</span></td>
+                                </tr>
+                                <tr>
+                                    <td>May 25, 2026</td>
+                                    <td>07:10 PM</td>
+                                    <td>SJDM</td>
+                                    <td><span class="badge success">Verified</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn-check-in mt-3" style="width: 100%;">View Full History</button>
+                </article>
+
+            </section>
+        </main>
+    </div>
+</body>
+</html>
