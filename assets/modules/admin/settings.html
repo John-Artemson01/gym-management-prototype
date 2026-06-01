@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twins Fitness | Settings</title>
+	<link rel="stylesheet" href="../../css/root.css">
+	<link rel="stylesheet" href="../../css/style.css">    
+    <style>
+        /* Tab layout styling */
+        .settings-nav {
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px solid var(--twins-border);
+            margin-bottom: 24px;
+            padding-bottom: 10px;
+        }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--twins-text-subtle);
+            padding: 10px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .tab-btn:hover {
+            color: var(--twins-text-primary);
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+        .tab-btn.is-active {
+            color: var(--twins-text-primary);
+            background-color: rgba(177, 50, 44, 0.15);
+        }
+        .settings-panel.hidden {
+            display: none !important;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 700px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Admin Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>Twins</span>
+                <small>Fitness Club</small>
+            </div>
+            <nav class="sidebar-nav" aria-label="Main navigation">
+                <a class="sidebar-link" href="dashboard.html">Dashboard</a>
+                <a class="sidebar-link" href="branches.html">Branches</a>
+                <a class="sidebar-link" href="clients.html">Clients</a>
+                <a class="sidebar-link" href="attendance.html">Attendance</a>
+                <a class="sidebar-link" href="employees.html">Employees</a>
+                <a class="sidebar-link" href="reports.html">Reports</a>
+                <a class="sidebar-link is-active" href="settings.html">Settings</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard">
+            <header class="dashboard-header">
+                <div>
+                    <h1>System Settings</h1>
+                    <p class="subtle-text">Configure club information, membership rules, and credentials.</p>
+                </div>
+            </header>
+
+            <!-- Settings Sub-Navigation Tabs -->
+            <nav class="settings-nav">
+                <button class="tab-btn is-active" onclick="switchTab(event, 'club')">Club Configuration</button>
+                <button class="tab-btn" onclick="switchTab(event, 'plans')">Membership Plans</button>
+                <button class="tab-btn" onclick="switchTab(event, 'security')">Account Security</button>
+            </nav>
+
+            <!-- =================================================== -->
+            <!-- TAB 1: CLUB CONFIGURATION                           -->
+            <!-- =================================================== -->
+            <div id="panel-club" class="settings-panel">
+                <form onsubmit="event.preventDefault(); showToast();">
+                    <article class="panel-card" style="margin-bottom: 24px;">
+                        <h2>General Information</h2>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="clubName">Club Name</label>
+                                <input type="text" id="clubName" class="input-control" value="Twins Fitness Club">
+                            </div>
+                            <div class="input-group">
+                                <label for="sysCurrency">Base Currency</label>
+                                <input type="text" id="sysCurrency" class="input-control" value="PHP (₱)" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="operatingHours">Weekdays Operating Hours</label>
+                                <input type="text" id="operatingHours" class="input-control" value="06:00 AM - 09:00 PM">
+                            </div>
+                            <div class="input-group">
+                                <label for="weekendHours">Weekends Operating Hours</label>
+                                <input type="text" id="weekendHours" class="input-control" value="06:00 AM - 05:00 PM">
+                            </div>
+                        </div>
+                    </article>
+                    <button type="submit" class="btn-check-in" style="padding: 14px 32px;">Save Configurations</button>
+                </form>
+            </div>
+
+            <!-- =================================================== -->
+            <!-- TAB 2: MEMBERSHIP PLANS CONFIGURATION                -->
+            <!-- =================================================== -->
+            <div id="panel-plans" class="settings-panel hidden">
+                <form onsubmit="event.preventDefault(); showToast();">
+                    <article class="panel-card" style="margin-bottom: 24px;">
+                        <h2>Pricing Tier System Rules</h2>
+                        <p class="subtle-text" style="margin-top: -10px; margin-bottom: 20px;">Adjust values used globally across registration workflows.</p>
+                        
+                        <div class="form-row" style="align-items: center; border-bottom: 1px solid var(--twins-border); padding-bottom: 15px; margin-bottom: 15px;">
+                            <div>
+                                <strong style="display: block;">1 Month Base</strong>
+                                <span class="subtle-text" style="font-size: 0.85rem;">Standard single month gym access.</span>
+                            </div>
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <input type="number" class="input-control" value="1500" placeholder="₱">
+                            </div>
+                        </div>
+
+                        <div class="form-row" style="align-items: center; border-bottom: 1px solid var(--twins-border); padding-bottom: 15px; margin-bottom: 15px;">
+                            <div>
+                                <strong style="display: block;">3 Month Pro Plan</strong>
+                                <span class="subtle-text" style="font-size: 0.85rem;">Mid-tier recurring entry model.</span>
+                            </div>
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <input type="number" class="input-control" value="4000" placeholder="₱">
+                            </div>
+                        </div>
+
+                        <div class="form-row" style="align-items: center; padding-bottom: 5px;">
+                            <div>
+                                <strong style="display: block;">VIP Annual Premium</strong>
+                                <span class="subtle-text" style="font-size: 0.85rem;">Full 12-month access plus dynamic locker priority.</span>
+                            </div>
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <input type="number" class="input-control" value="12000" placeholder="₱">
+                            </div>
+                        </div>
+                    </article>
+                    <button type="submit" class="btn-check-in" style="padding: 14px 32px;">Update Rates</button>
+                </form>
+            </div>
+
+            <!-- =================================================== -->
+            <!-- TAB 3: ACCOUNT SECURITY                             -->
+            <!-- =================================================== -->
+            <div id="panel-security" class="settings-panel hidden">
+                <form onsubmit="event.preventDefault(); this.reset(); showToast('Password updated successfully!');">
+                    <article class="panel-card" style="margin-bottom: 24px;">
+                        <h2>Change Administrator Password</h2>
+                        <div class="input-group" style="max-width: 500px;">
+                            <label for="currPass">Current Password</label>
+                            <input type="password" id="currPass" class="input-control" required>
+                        </div>
+                        <div class="input-group" style="max-width: 500px;">
+                            <label for="newPass">New Password</label>
+                            <input type="password" id="newPass" class="input-control" required>
+                        </div>
+                        <div class="input-group" style="max-width: 500px;">
+                            <label for="confirmPass">Confirm New Password</label>
+                            <input type="password" id="confirmPass" class="input-control" required>
+                        </div>
+                    </article>
+                    <button type="submit" class="btn-check-in" style="padding: 14px 32px;">Update Credentials</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- UI Alert Toast Integration -->
+    <div id="toastNotification" style="position: fixed; bottom: -60px; right: 24px; background-color: var(--twins-success); color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 99999;">
+        Changes saved successfully!
+    </div>
+
+    <!-- =================================================== -->
+    <!-- INTERACTIVE ENGINE JAVASCRIPT                       -->
+    <!-- =================================================== -->
+    <script>
+        // Tab switching engine
+        function switchTab(event, tabName) {
+            // Remove active classes from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('is-active'));
+            
+            // Add active class to current button clicked
+            event.currentTarget.classList.add('is-active');
+
+            // Hide all setting panels
+            document.querySelectorAll('.settings-panel').forEach(panel => panel.classList.add('hidden'));
+
+            // Show selected target configuration panel
+            document.getElementById('panel-' + tabName).classList.remove('hidden');
+        }
+
+        // Save confirmation toast notification alert logic
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            if(message) toast.innerText = message;
+            
+            toast.style.bottom = '24px'; // slide up
+            setTimeout(() => {
+                toast.style.bottom = '-60px'; // slide down out of viewport
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
