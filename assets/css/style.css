@@ -32,10 +32,12 @@ body {
 }
 
 .dashboard {
-    max-width: 980px;
+    /* Change this from 980px to 100% to fill the screen */
+    max-width: 100%; 
     width: 100%;
     margin: 0;
-    padding: 32px 24px 48px;
+    /* Optional: You can reduce the 24px side padding if you want it closer to the edges */
+    padding: 32px 24px 48px; 
     min-width: 0;
 }
 
@@ -139,7 +141,7 @@ body {
     text-transform: uppercase;
     letter-spacing: 1.2px;
     font-size: 0.75rem;
-    color: var(--twins-text-subtle);
+    color: var(--twins-accent-red);
 }
 
 .stat-value {
@@ -445,6 +447,15 @@ body {
     vertical-align: middle; 
 }
 
+.table-card .history-table th {
+    background-color: var(--twins-accent-primary);
+    color: var(--twins-accent-red);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
 /* Action Buttons Base Styling */
 .btn-action {
     padding: 6px 14px;
@@ -620,4 +631,146 @@ select.input-control {
     background-position: right 1rem center;
     background-size: 1em;
     cursor: pointer;
+}
+
+/* =========================================
+   1. UNIFIED TABLE STYLING
+   ========================================= */
+.table-card {
+    padding: 0; /* Flushes table to the edge of the card */
+    overflow: hidden;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    /* Only add padding if a scrollbar appears */
+    padding-bottom: 2px; 
+}
+
+.history-table { 
+    width: 100%; 
+    min-width: 700px; /* Forces scrollbar on mobile instead of squishing */
+    border-collapse: collapse; 
+    text-align: left; 
+}
+
+.history-table th { 
+    color: var(--twins-text-subtle); 
+    padding: 16px 20px; 
+    border-bottom: 2px solid var(--twins-border); 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    font-size: 0.8rem; 
+    letter-spacing: 1px; 
+}
+
+.history-table td { 
+    padding: 16px 20px; /* Spacious admin feel */
+    border-bottom: 1px solid var(--twins-border); 
+    vertical-align: middle; /* Perfectly centers buttons and badges */
+}
+
+.history-table tr:hover td { 
+    background-color: rgba(255, 255, 255, 0.02); /* Very subtle hover effect for rows */
+}
+
+
+/* =========================================
+   2. UNIFIED STATUS BADGES
+   ========================================= */
+.badge { 
+    padding: 5px 10px; 
+    border-radius: 4px; 
+    font-size: 0.75rem; 
+    font-weight: bold;
+    border: 1px solid transparent; /* Locks height */
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Green - Active */
+.badge.success { 
+    background-color: rgba(46, 125, 50, 0.15); 
+    color: #81c784; 
+    border-color: var(--twins-success); 
+}
+
+/* Orange/Amber - Expiring Soon */
+.badge.warning {
+    background-color: rgba(217, 119, 6, 0.15); 
+    color: #f59e0b; 
+    border-color: #f59e0b;
+}
+
+/* Taupe/Gray - Pending or Pre-Opening */
+.badge.pending {
+    background-color: rgba(167, 154, 140, 0.15); 
+    color: var(--twins-text-primary);
+    border-color: var(--twins-border);
+}
+
+/* Red - Expired or Archived */
+.badge.inactive {
+    background-color: rgba(177, 50, 44, 0.15); 
+    color: var(--twins-accent-red);
+    border-color: var(--twins-accent-red);
+}
+
+
+/* =========================================
+   3. UNIFIED ACTION BUTTONS
+   ========================================= */
+.btn-action {
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+    margin-left: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hollow Button (Edit) */
+.btn-action.edit {
+    background-color: transparent;
+    color: var(--twins-accent-red);
+    border: 1px solid var(--twins-accent-red);
+}
+
+.btn-action.edit:hover {
+    background-color: var(--twins-accent-red);
+    color: var(--twins-text-primary);
+}
+
+/* Solid Buttons (Archive & Renew) */
+.btn-action.archive, 
+.btn-action.renew {
+    background-color: var(--twins-accent-red);
+    color: var(--twins-text-primary);
+    border: 1px solid var(--twins-accent-red);
+}
+
+.btn-action.archive:hover, 
+.btn-action.renew:hover {
+    background-color: var(--twins-hover-bg);
+    border-color: var(--twins-hover-bg);
+    box-shadow: 0 2px 8px rgba(177, 50, 44, 0.4);
+}
+
+/* Mobile Action Button Fix */
+@media (max-width: 700px) {
+    .btn-action {
+        display: block;
+        width: 100%;
+        margin: 8px 0 0 0; /* Add top spacing when stacked on mobile */
+        text-align: center;
+    }
 }

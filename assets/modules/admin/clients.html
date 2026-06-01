@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twins Fitness | Client Management</title>
+	<link rel="stylesheet" href="../../css/root.css">
+	<link rel="stylesheet" href="../../css/style.css">
+
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Admin Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>Twins</span>
+                <small>Fitness Club</small>
+            </div>
+            <nav class="sidebar-nav" aria-label="Main navigation">
+                <a class="sidebar-link" href="dashboard.html">Dashboard</a>
+                <a class="sidebar-link" href="branches.html">Branches</a>
+                <a class="sidebar-link is-active" href="clients.html">Clients</a>
+                <a class="sidebar-link" href="attendance.html">Attendance</a>
+                <a class="sidebar-link" href="employees.html">Employees</a>
+                <a class="sidebar-link" href="reports.html">Reports</a>
+                <a class="sidebar-link" href="settings.html">Settings</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard">
+            <header class="dashboard-header" style="align-items: flex-start; flex-direction: column; gap: 15px;">
+                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h1>Client Management</h1>
+                        <p class="subtle-text">Manage memberships, renewals, and member data.</p>
+                    </div>
+                    <button class="btn-check-in" onclick="openModal('clientModal')">+ Register New Client</button>
+                </div>
+                
+                <!-- Search and Filter Bar -->
+                <div class="filter-bar panel-card">
+                    <input type="text" class="input-control search-input" placeholder="Search by Name or Member ID...">
+                    
+                    <select class="input-control filter-select">
+                        <option value="all">All Branches</option>
+                        <option value="sjdm">SJDM</option>
+                        <option value="novaliches">Novaliches</option>
+                        <option value="lagro">Lagro</option>
+                    </select>
+
+                    <select class="input-control filter-select">
+                        <option value="all">All Statuses</option>
+                        <option value="active">Active</option>
+                        <option value="expiring">Expiring Soon</option>
+                        <option value="expired">Expired</option>
+                    </select>
+                </div>
+            </header>
+
+            <section class="client-grid">
+                <article class="panel-card table-card">
+                    <div class="table-responsive">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Member ID</th>
+                                    <th>Full Name</th>
+                                    <th>Branch</th>
+                                    <th>Plan</th>
+                                    <th>Expiry Date</th>
+                                    <th>Status</th>
+                                    <th style="text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>TF-2026-8842</strong></td>
+                                    <td>John Artemson</td>
+                                    <td>SJDM</td>
+                                    <td>VIP Annual</td>
+                                    <td>Dec 15, 2026</td>
+                                    <td><span class="badge success">Active</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('clientModal')">Edit</button>
+                                        <button class="btn-action renew">Renew</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TF-2026-9011</strong></td>
+                                    <td>Joyce Escudero</td>
+                                    <td>SJDM</td>
+                                    <td>3 Months</td>
+                                    <td><span style="color: var(--twins-accent-red); font-weight: bold;">Jun 05, 2026</span></td>
+                                    <td><span class="badge warning">Expiring</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('clientModal')">Edit</button>
+                                        <button class="btn-action renew">Renew</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TF-2025-1102</strong></td>
+                                    <td>John Michael Carbonel</td>
+                                    <td>Novaliches</td>
+                                    <td>Monthly</td>
+                                    <td>May 20, 2026</td>
+                                    <td><span class="badge inactive">Expired</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('clientModal')">Edit</button>
+                                        <button class="btn-action renew">Renew</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <!-- The Add/Edit Client Modal -->
+    <div id="clientModal" class="modal-overlay">
+        <div class="modal-content panel-card">
+            <div class="modal-header">
+                <h2 style="margin: 0; border: none; padding: 0;">Client Registration</h2>
+                <button class="close-btn" onclick="closeModal('clientModal')">&times;</button>
+            </div>
+            <form id="clientForm" onsubmit="event.preventDefault(); closeModal('clientModal');">
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <label for="fName">First Name</label>
+                        <input type="text" id="fName" class="input-control" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="lName">Last Name</label>
+                        <input type="text" id="lName" class="input-control" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="contact">Phone Number</label>
+                    <input type="text" id="contact" class="input-control" placeholder="09XX-XXX-XXXX" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <label for="homeBranch">Home Branch</label>
+                        <select id="homeBranch" class="input-control">
+                            <option value="sjdm">SJDM</option>
+                            <option value="novaliches">Novaliches</option>
+                            <option value="lagro">Lagro</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="planType">Membership Plan</label>
+                        <select id="planType" class="input-control">
+                            <option value="1">1 Month - Base</option>
+                            <option value="3">3 Months - Pro</option>
+                            <option value="12">12 Months - VIP</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" class="btn-check-in" style="background-color: var(--twins-border); flex: 1;" onclick="closeModal('clientModal')">Cancel</button>
+                    <button type="submit" class="btn-check-in" style="flex: 2;">Save & Generate ID</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = ''; 
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('clientModal');
+            if (event.target === modal) {
+                closeModal('clientModal');
+            }
+        }
+    </script>
+</body>
+</html>
