@@ -391,6 +391,17 @@ body {
         grid-template-columns: 1fr;
         width: 100%;
     }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Enables smooth momentum scrolling on iOS */
+        padding-bottom: 10px; /* Optional: gives the scrollbar a little breathing room */
+    }
+
+    .history-table {
+        min-width: 600px; /* Forces the table to stay wide enough to trigger the scrollbar */
+    }
 }
 
 @media (max-width: 480px) {
@@ -420,4 +431,193 @@ body {
         width: 50px;
         height: 50px;
     }
+}
+
+/* --- Table Actions & Layout --- */
+.table-card {
+    padding: 0; 
+    overflow: hidden;
+}
+
+.table-card .history-table th, 
+.table-card .history-table td {
+    padding: 16px 20px; 
+    vertical-align: middle; 
+}
+
+/* Action Buttons Base Styling */
+.btn-action {
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+    margin-left: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Archive Button - Matches "Add New Branch" (Solid) */
+.btn-action.archive {
+    background-color: var(--twins-accent-red);
+    color: var(--twins-text-primary);
+    border: 1px solid var(--twins-accent-red);
+}
+
+.btn-action.archive:hover {
+    background-color: var(--twins-hover-bg);
+    border-color: var(--twins-hover-bg);
+    box-shadow: 0 2px 8px rgba(177, 50, 44, 0.4);
+}
+
+/* Edit Button - Inverted (Hollow Ghost Button) */
+.btn-action.edit {
+    background-color: transparent;
+    color: var(--twins-accent-red);
+    border: 1px solid var(--twins-accent-red);
+}
+
+.btn-action.edit:hover {
+    background-color: var(--twins-accent-red);
+    color: var(--twins-text-primary);
+}
+
+/* Mobile specific table scroll fix */
+@media (max-width: 700px) {
+    .btn-action {
+        display: block;
+        width: 100%;
+        margin: 5px 0 0 0;
+        text-align: center;
+    }
+}
+
+/* --- Status Badges --- */
+.badge { 
+    padding: 4px 8px; 
+    border-radius: 4px; 
+    font-size: 0.75rem; 
+    font-weight: bold;
+    border: 1px solid transparent; /* Forces uniform height across all badges */
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Active Status */
+.badge.success { 
+    background-color: rgba(46, 125, 50, 0.15); 
+    color: #81c784; 
+    border-color: var(--twins-success); 
+}
+
+/* Pre-opening / Pending Status */
+.badge.pending {
+    background-color: rgba(167, 154, 140, 0.15); /* Faint taupe background */
+    color: var(--twins-text-primary);
+    border-color: var(--twins-border);
+}
+
+/* Archived / Inactive Status (for future use) */
+.badge.inactive {
+    background-color: rgba(177, 50, 44, 0.15); 
+    color: var(--twins-accent-red);
+    border-color: var(--twins-accent-red);
+}
+
+/* =========================================
+   MODAL OVERLAY & POPUP STYLING
+   ========================================= */
+
+.modal-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px); /* Frosted glass effect */
+    z-index: 9999; /* Ensures it sits on top of absolutely everything */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* When JavaScript adds the 'active' class, this makes it visible */
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--twins-bg-panel);
+    width: 100%;
+    max-width: 500px; /* Limits how wide the popup gets on PC */
+    border: 1px solid var(--twins-border);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    
+    /* Crucial for mobile: prevents it from touching the screen edges */
+    margin: 16px; 
+    box-sizing: border-box;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0); /* Adds a slight slide-down animation */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--twins-border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--twins-text-subtle);
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+    padding: 0;
+}
+
+.close-btn:hover {
+    color: var(--twins-accent-red);
+}
+
+/* Input groups inside the modal */
+.modal-content .input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.modal-content .input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--twins-text-primary);
+    font-size: 0.9rem;
+}
+
+/* Customizing the select dropdown arrow to match dark mode */
+select.input-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a79a8c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    cursor: pointer;
 }

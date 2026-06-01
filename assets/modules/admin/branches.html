@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twins Fitness | Branch Management</title>
+	<link rel="stylesheet" href="../../css/root.css">
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Admin Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>Twins</span>
+                <small>Fitness Club</small>
+            </div>
+            <nav class="sidebar-nav" aria-label="Main navigation">
+                <a class="sidebar-link" href="dashboard.html">Dashboard</a>
+                <a class="sidebar-link is-active" href="branches.html">Branches</a>
+                <a class="sidebar-link" href="clients.html">Clients</a>
+                <a class="sidebar-link" href="attendance.html">Attendance</a>
+                <a class="sidebar-link" href="employees.html">Employees</a>
+                <a class="sidebar-link" href="reports.html">Reports</a>
+                <a class="sidebar-link" href="settings.html">Settings</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard">
+            <header class="dashboard-header" style="align-items: center;">
+                <div>
+                    <h1>Branch Management</h1>
+                    <p class="subtle-text">Monitor and configure gym locations.</p>
+                </div>
+                <!-- Add New Branch Button -->
+                <button class="btn-check-in" onclick="openModal('branchModal')">+ Add New Branch</button>
+            </header>
+
+            <section class="branch-grid">
+                <article class="panel-card table-card">
+                    <div class="table-responsive">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Branch Code</th>
+                                    <th>Location Name</th>
+                                    <th>Manager</th>
+                                    <th>Contact</th>
+                                    <th>Status</th>
+                                    <th style="text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>TF-SJDM</strong></td>
+                                    <td>San Jose del Monte</td>
+                                    <td>Mark D.</td>
+                                    <td class="subtle-text">0917-123-4567</td>
+                                    <td><span class="badge success">Active</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('branchModal')">Edit</button>
+                                        <button class="btn-action archive">Archive</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TF-NOVA</strong></td>
+                                    <td>Novaliches</td>
+                                    <td>Sarah L.</td>
+                                    <td class="subtle-text">0917-987-6543</td>
+                                    <td><span class="badge success">Active</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('branchModal')">Edit</button>
+                                        <button class="btn-action archive">Archive</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TF-LAGR</strong></td>
+                                    <td>Lagro</td>
+                                    <td>James R.</td>
+                                    <td class="subtle-text">0918-456-7890</td>
+                                    <td><span class="badge success">Active</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('branchModal')">Edit</button>
+                                        <button class="btn-action archive">Archive</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TF-MALI</strong></td>
+                                    <td>Maligaya</td>
+                                    <td>TBD</td>
+                                    <td class="subtle-text">N/A</td>
+                                    <td><span class="badge" style="background-color: var(--twins-border); color: var(--twins-text-primary);">Pre-opening</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('branchModal')">Edit</button>
+                                        <button class="btn-action archive">Archive</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <!-- The Add/Edit Branch Modal -->
+    <div id="branchModal" class="modal-overlay">
+        <div class="modal-content panel-card">
+            <div class="modal-header">
+                <h2 style="margin: 0; border: none; padding: 0;">Branch Details</h2>
+                <button class="close-btn" onclick="closeModal('branchModal')">&times;</button>
+            </div>
+            <form id="branchForm" onsubmit="event.preventDefault(); closeModal('branchModal');">
+                <div class="input-group">
+                    <label for="branchCode">Branch Code</label>
+                    <input type="text" id="branchCode" class="input-control" placeholder="e.g., TF-CABU" required>
+                </div>
+                <div class="input-group">
+                    <label for="branchName">Location Name</label>
+                    <input type="text" id="branchName" class="input-control" placeholder="e.g., Cabuyao" required>
+                </div>
+                <div class="input-group">
+                    <label for="branchManager">Assigned Manager</label>
+                    <input type="text" id="branchManager" class="input-control" placeholder="Staff Name">
+                </div>
+                <div class="input-group">
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="text" id="contactNumber" class="input-control" placeholder="09XX-XXX-XXXX">
+                </div>
+                <div class="input-group">
+                    <label for="status">Operational Status</label>
+                    <select id="status" class="input-control">
+                        <option value="active">Active</option>
+                        <option value="pre-opening">Pre-opening</option>
+                        <option value="archived">Archived (Closed)</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 30px;">
+                    <button type="button" class="btn-check-in" style="background-color: var(--twins-border); flex: 1;" onclick="closeModal('branchModal')">Cancel</button>
+                    <button type="submit" class="btn-check-in" style="flex: 2;">Save Branch</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal Control Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = ''; // Restore background scrolling
+            document.getElementById('branchForm').reset(); // Clear form on close
+        }
+
+        // Close modal when clicking outside the content box
+        window.onclick = function(event) {
+            const modal = document.getElementById('branchModal');
+            if (event.target === modal) {
+                closeModal('branchModal');
+            }
+        }
+    </script>
+</body>
+</html>
