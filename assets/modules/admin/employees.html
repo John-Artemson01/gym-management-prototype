@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twins Fitness | Employee Management</title>
+	<link rel="stylesheet" href="../../css/root.css">
+	<link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>Twins</span>
+                <small>Fitness Club</small>
+            </div>
+            <nav class="sidebar-nav" aria-label="Main navigation">
+                <a class="sidebar-link" href="dashboard.html">Dashboard</a>
+                <a class="sidebar-link" href="branches.html">Branches</a>
+                <a class="sidebar-link" href="clients.html">Clients</a>
+                <a class="sidebar-link" href="attendance.html">Attendance</a>
+                <a class="sidebar-link is-active" href="employees.html">Employees</a>
+                <a class="sidebar-link" href="reports.html">Reports</a>
+                <a class="sidebar-link" href="settings.html">Settings</a>
+            </nav>
+        </aside>
+
+        <main class="dashboard">
+            <header class="dashboard-header" style="align-items: flex-start; flex-direction: column; gap: 15px;">
+                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h1>Employee Management</h1>
+                        <p class="subtle-text">Manage staff directory, roles, and timesheets.</p>
+                    </div>
+                    <button class="btn-check-in" onclick="openModal('employeeModal')">+ Add New Employee</button>
+                </div>
+                
+                <div class="filter-bar panel-card" style="display: flex; gap: 15px; width: 100%; padding: 15px;">
+                    <input type="text" class="input-control" style="flex: 2; min-width: 200px;" placeholder="Search by Name or Staff ID...">
+                    
+                    <select class="input-control" style="flex: 1; min-width: 150px;">
+                        <option value="all">All Roles</option>
+                        <option value="manager">Manager</option>
+                        <option value="trainer">Trainer</option>
+                        <option value="frontdesk">Front Desk</option>
+                    </select>
+
+                    <select class="input-control" style="flex: 1; min-width: 150px;">
+                        <option value="all">All Branches</option>
+                        <option value="sjdm">SJDM</option>
+                        <option value="novaliches">Novaliches</option>
+                    </select>
+                </div>
+            </header>
+
+            <section class="employee-grid">
+                <article class="panel-card table-card">
+                    <div class="table-responsive">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Staff ID</th>
+                                    <th>Full Name</th>
+                                    <th>Role</th>
+                                    <th>Assigned Branch</th>
+                                    <th>Status</th>
+                                    <th style="text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>EMP-1042</strong></td>
+                                    <td>Mark David</td>
+                                    <td>Branch Manager</td>
+                                    <td>SJDM</td>
+                                    <td><span class="badge success">Active</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('timesheetModal')">Timesheet</button>
+                                        <button class="btn-action edit" onclick="openModal('employeeModal')">Edit</button>
+                                        <button class="btn-action archive">Deactivate</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>EMP-2099</strong></td>
+                                    <td>Sarah Lopez</td>
+                                    <td>Personal Trainer</td>
+                                    <td>Novaliches</td>
+                                    <td><span class="badge success">Active</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('timesheetModal')">Timesheet</button>
+                                        <button class="btn-action edit" onclick="openModal('employeeModal')">Edit</button>
+                                        <button class="btn-action archive">Deactivate</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>EMP-3150</strong></td>
+                                    <td>James Reyes</td>
+                                    <td>Front Desk</td>
+                                    <td>SJDM</td>
+                                    <td><span class="badge warning">On Leave</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('timesheetModal')">Timesheet</button>
+                                        <button class="btn-action edit" onclick="openModal('employeeModal')">Edit</button>
+                                        <button class="btn-action archive">Deactivate</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <div id="employeeModal" class="modal-overlay">
+        <div class="modal-content panel-card">
+            <div class="modal-header">
+                <h2 style="margin: 0; border: none; padding: 0;">Employee Profile</h2>
+                <button class="close-btn" onclick="closeModal('employeeModal')">&times;</button>
+            </div>
+            <form id="employeeForm" onsubmit="event.preventDefault(); closeModal('employeeModal');">
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <label for="fName">First Name</label>
+                        <input type="text" id="fName" class="input-control" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="lName">Last Name</label>
+                        <input type="text" id="lName" class="input-control" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="contact">Phone Number</label>
+                    <input type="text" id="contact" class="input-control" placeholder="09XX-XXX-XXXX" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="input-group">
+                        <label for="role">Job Role</label>
+                        <select id="role" class="input-control">
+                            <option value="manager">Branch Manager</option>
+                            <option value="trainer">Personal Trainer</option>
+                            <option value="frontdesk">Front Desk</option>
+                            <option value="maintenance">Maintenance</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="assignedBranch">Assigned Branch</label>
+                        <select id="assignedBranch" class="input-control">
+                            <option value="sjdm">SJDM</option>
+                            <option value="novaliches">Novaliches</option>
+                            <option value="lagro">Lagro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" class="btn-check-in" style="background-color: var(--twins-border); flex: 1;" onclick="closeModal('employeeModal')">Cancel</button>
+                    <button type="submit" class="btn-check-in" style="flex: 2;">Save Employee</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="timesheetModal" class="modal-overlay">
+        <div class="modal-content panel-card" style="max-width: 800px;"> <div class="modal-header">
+                <div>
+                    <h2 style="margin: 0; border: none; padding: 0;">Timesheet Overview</h2>
+                    <p class="subtle-text" style="margin: 5px 0 0 0;">Mark David - Branch Manager (June 2026)</p>
+                </div>
+                <button class="close-btn" onclick="closeModal('timesheetModal')">&times;</button>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                <div style="background-color: var(--twins-bg-primary); padding: 15px; border-radius: 8px; border: 1px solid var(--twins-border);">
+                    <div class="stat-label">Total Hours</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--twins-text-primary);">86.5h</div>
+                </div>
+                <div style="background-color: var(--twins-bg-primary); padding: 15px; border-radius: 8px; border: 1px solid var(--twins-border);">
+                    <div class="stat-label">Overtime</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--twins-accent-red);">4.0h</div>
+                </div>
+                <div style="background-color: var(--twins-bg-primary); padding: 15px; border-radius: 8px; border: 1px solid var(--twins-border);">
+                    <div class="stat-label">Days Present</div>
+                    <div style="font-size: 1.5rem; font-weight: bold; color: var(--twins-text-primary);">11</div>
+                </div>
+            </div>
+
+            <div class="table-responsive" style="max-height: 300px; overflow-y: auto; border: 1px solid var(--twins-border); border-radius: 8px;">
+                <table class="history-table" style="min-width: 600px; border-collapse: separate; border-spacing: 0;">
+                    <thead style="position: sticky; top: 0; background-color: var(--twins-bg-panel); z-index: 1;">
+                        <tr>
+                            <th style="border-top: none;">Date</th>
+                            <th style="border-top: none;">Time In</th>
+                            <th style="border-top: none;">Time Out</th>
+                            <th style="border-top: none;">Hours</th>
+                            <th style="border-top: none;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>June 12, 2026</td>
+                            <td>08:50 AM</td>
+                            <td>05:05 PM</td>
+                            <td>8.25h</td>
+                            <td><span class="badge success">On Time</span></td>
+                        </tr>
+                        <tr>
+                            <td>June 11, 2026</td>
+                            <td>09:15 AM</td>
+                            <td>05:30 PM</td>
+                            <td>8.25h</td>
+                            <td><span class="badge warning">Late</span></td>
+                        </tr>
+                        <tr>
+                            <td>June 10, 2026</td>
+                            <td>08:45 AM</td>
+                            <td>06:00 PM</td>
+                            <td>9.25h</td>
+                            <td><span class="badge inactive">Overtime</span></td>
+                        </tr>
+                        <tr>
+                            <td>June 09, 2026</td>
+                            <td>08:55 AM</td>
+                            <td>05:00 PM</td>
+                            <td>8.00h</td>
+                            <td><span class="badge success">On Time</span></td>
+                        </tr>
+                        <tr>
+                            <td>June 08, 2026</td>
+                            <td colspan="4" class="subtle-text text-center" style="text-align: center; font-style: italic;">Scheduled Day Off</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 25px;">
+                <button type="button" class="btn-check-in" style="background-color: var(--twins-border); flex: 1;" onclick="closeModal('timesheetModal')">Close</button>
+                <button type="button" class="btn-check-in" style="flex: 1;"><span style="margin-right: 5px;">📥</span> Export to CSV</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = ''; 
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('employeeModal');
+            if (event.target === modal) {
+                closeModal('employeeModal');
+            }
+        }
+    </script>
+</body>
+</html>
