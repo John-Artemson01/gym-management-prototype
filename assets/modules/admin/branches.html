@@ -10,21 +10,7 @@
 <body>
     <div class="dashboard-layout">
         <!-- Admin Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-brand">
-                <span>Twins</span>
-                <small>Fitness Club</small>
-            </div>
-            <nav class="sidebar-nav" aria-label="Main navigation">
-                <a class="sidebar-link" href="dashboard.html">Dashboard</a>
-                <a class="sidebar-link is-active" href="branches.html">Branches</a>
-                <a class="sidebar-link" href="clients.html">Clients</a>
-                <a class="sidebar-link" href="attendance.html">Attendance</a>
-                <a class="sidebar-link" href="employees.html">Employees</a>
-                <a class="sidebar-link" href="reports.html">Reports</a>
-                <a class="sidebar-link" href="settings.html">Settings</a>
-            </nav>
-        </aside>
+        <aside class="sidebar" id="sidebar-container"></aside>
 
         <main class="dashboard">
             <header class="dashboard-header" style="align-items: center;">
@@ -142,6 +128,8 @@
             </form>
         </div>
     </div>
+
+    <script src="../../js/sidebar-injector.js"></script>
 
     <script>
         // Modal Control Functions
