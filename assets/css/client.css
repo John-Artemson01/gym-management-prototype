@@ -482,3 +482,66 @@ body {
         padding: 3px 6px; 
     }
 }
+
+/* =========================================
+   FORM GROUPS & TEXT INPUT STYLING
+   ========================================= */
+
+/* Forces the label and input box to stack vertically with clean spacing */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Breathing room between label text and input frame */
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Styles the text labels above your inputs */
+.input-group label {
+    color: #a79a8c; /* Muted taupe/silver text */
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* Centralized control styling for all input types (Text, Password, Tel, Select) */
+.input-control {
+    width: 100%; /* Forces fields to expand to the full width of their column */
+    background-color: #1a191a; /* Rich dark theme background matching panel cards */
+    color: #ffffff; /* Crisp white user text */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Muted slate border line */
+    padding: 12px 14px; /* Uniform padding for text alignment */
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    box-sizing: border-box; /* Includes padding in overall element width calculation */
+    transition: all 0.2s ease-in-out;
+}
+
+/* Interactive highlight when an input field becomes active */
+.input-control:focus {
+    border-color: #b1322c; /* Twins accent red */
+    box-shadow: 0 0 0 2px rgba(177, 50, 44, 0.15);
+}
+
+/* Visual layout adjustments for disabled context tracking (e.g., Home Branch) */
+.input-control:disabled {
+    background-color: rgba(255, 255, 255, 0.02);
+    color: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.04);
+    cursor: not-allowed;
+}
+
+/* Re-incorporate dynamic arrow structure specifically for dropdown options */
+select.input-control {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23a79a8c'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+}

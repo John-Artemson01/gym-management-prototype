@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twins Fitness | Account Settings</title>
+    <link rel="stylesheet" href="../../css/client.css">
+    <style>
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 700px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Dynamic Client Sidebar Injector Box -->
+        <aside class="sidebar" id="client-sidebar-container"></aside>
+
+        <main class="dashboard">
+            <header class="dashboard-header">
+                <div>
+                    <h1>Account Settings</h1>
+                    <p class="subtle-text">Manage your personal profile information and update your account password.</p>
+                </div>
+            </header>
+
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+                
+                <!-- 1. PERSONAL PROFILE CONFIGURATION -->
+                <section id="profile-settings">
+                    <form onsubmit="event.preventDefault(); showToast('Profile details updated successfully!');">
+                        <article class="panel-card" style="margin: 0; margin-bottom: 20px;">
+                            <h2>Personal Information</h2>
+                            <p class="subtle-text" style="margin-top: -10px; margin-bottom: 20px; font-size: 0.85rem;">
+                                Keep your primary contact details accurate for membership and billing verification notifications.
+                            </p>
+                            
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label for="memberFirstName">First Name</label>
+                                    <input type="text" id="memberFirstName" class="input-control" value="John Artemson" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="memberLastName">Last Name</label>
+                                    <input type="text" id="memberLastName" class="input-control" value="De Guzman" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label for="memberPhone">Phone Number</label>
+                                    <input type="tel" id="memberPhone" class="input-control" value="09123456789" placeholder="09XX-XXX-XXXX" required>
+                                </div>
+                                <div class="input-group">
+                                    <!-- Lock branch assignment since admin handles registrations -->
+                                    <label for="memberBranch">Home Branch</label>
+                                    <input type="text" id="memberBranch" class="input-control" value="San Jose del Monte (SJDM)" disabled style="opacity: 0.6; cursor: not-allowed;">
+                                </div>
+                            </div>
+                        </article>
+                        <button type="submit" class="btn-check-in" style="padding: 12px 28px;">Save Profile Changes</button>
+                    </form>
+                </section>
+
+                <!-- 2. ACCOUNT SECURITY & ACCESS PASSWORD -->
+                <section id="security-settings">
+                    <form onsubmit="event.preventDefault(); this.reset(); showToast('Password changed successfully!');">
+                        <article class="panel-card" style="margin: 0; margin-bottom: 20px;">
+                            <h2>Update Password</h2>
+                            <p class="subtle-text" style="margin-top: -10px; margin-bottom: 20px; font-size: 0.85rem;">
+                                Choose a strong security credential to safeguard your portal access check-ins.
+                            </p>
+                            
+                            <div class="input-group" style="max-width: 500px;">
+                                <label for="oldPassword">Current Password</label>
+                                <input type="password" id="oldPassword" class="input-control" required>
+                            </div>
+                            
+                            <div class="form-row" style="max-width: 500px;">
+                                <div class="input-group">
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" id="newPassword" class="input-control" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row" style="max-width: 500px;">
+                                <div class="input-group">
+                                    <label for="confirmPassword">Confirm New Password</label>
+                                    <input type="password" id="confirmPassword" class="input-control" required>
+                                </div>
+                            </div>
+                        </article>
+                        <button type="submit" class="btn-check-in" style="padding: 12px 28px;">Update Password</button>
+                    </form>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- UI Save Confirmation Toast Alert -->
+    <div id="toastNotification" style="position: fixed; bottom: -60px; right: 24px; background-color: #2e7d32; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.4); transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 99999;">
+        Changes saved successfully!
+    </div>
+
+    <!-- Script Configuration -->
+    <script src="../../js/client-injector.js"></script>
+    <script>
+        // Interactive visual engine for feedback confirmation
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            if(message) toast.innerText = message;
+            
+            toast.style.bottom = '24px'; // slide up into frame
+            setTimeout(() => {
+                toast.style.bottom = '-60px'; // slide down out of view
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
