@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twins Fitness | Attendance History</title>
+    <link rel="stylesheet" href="../../css/client.css">
+
+    <style>
+        /* --- Standardized Form Controls for Client Portal --- */
+        .input-control {
+            background-color: #1a191a; /* Matches the dark panel card depth */
+            color: #ffffff; /* Crisp white text */
+            border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle border matching your layout line rules */
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+            appearance: none; /* Removes default native browser styling styling on iOS/Android */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23a79a8c'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>"); /* Elegant custom dropdown arrow */
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px; /* Gives space so text doesn't overlap the arrow icon */
+        }
+
+        /* Accent highlight when a user interacts with the filter selection box */
+        .input-control:focus {
+            border-color: #b1322c; /* Twins accent red */
+            box-shadow: 0 0 0 2px rgba(177, 50, 44, 0.15);
+        }
+
+        /* Ensure the option dropdown lists render dark across modern browsers */
+        .input-control option {
+            background-color: #171617;
+            color: #ffffff;
+        }
+    </style>
+
+    
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Dynamic Client Sidebar Injector Box -->
+        <aside class="sidebar" id="client-sidebar-container"></aside>
+
+        <main class="dashboard">
+            <header class="dashboard-header" style="align-items: flex-start; flex-direction: column; gap: 15px;">
+                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h1>Attendance History</h1>
+                        <p class="subtle-text">Track your workout consistency, duration, and facility check-in logs.</p>
+                    </div>
+                </div>
+                
+                <!-- History Filter Bar -->
+                <div class="filter-bar panel-card" style="display: flex; gap: 15px; width: 100%; padding: 15px; box-sizing: border-box;">
+                    <select class="input-control" style="flex: 1; min-width: 150px;">
+                        <option value="this_month">This Month (June 2026)</option>
+                        <option value="last_month">Last Month (May 2026)</option>
+                        <option value="all_time">All-Time History</option>
+                    </select>
+
+                    <select class="input-control" style="flex: 1; min-width: 150px;">
+                        <option value="all">All Branches</option>
+                        <option value="sjdm">San Jose del Monte</option>
+                        <option value="novaliches">Novaliches</option>
+                        <option value="lagro">Lagro</option>
+                    </select>
+                </div>
+            </header>
+
+            <!-- Quick Consistency Stats Grid -->
+            <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-bottom: 24px;">
+                <article class="stat-card panel-card" style="margin: 0;">
+                    <span class="stat-label">Total Workouts (June)</span>
+                    <strong class="stat-value" style="color: var(--twins-text-primary);">1 Session</strong>
+                    <span class="stat-subline" style="color: var(--twins-text-subtle);">Month just started</span>
+                </article>
+                <article class="stat-card panel-card" style="margin: 0;">
+                    <span class="stat-label">Total Workouts (May)</span>
+                    <strong class="stat-value">16 Sessions</strong>
+                    <span class="stat-subline" style="color: #81c784;">▲ Hit monthly target!</span>
+                </article>
+                <article class="stat-card panel-card" style="margin: 0;">
+                    <span class="stat-label">Avg. Workout Time</span>
+                    <strong class="stat-value">74 mins</strong>
+                    <span class="stat-subline" style="color: var(--twins-text-subtle);">Steady training window</span>
+                </article>
+                <article class="stat-card panel-card" style="margin: 0;">
+                    <span class="stat-label">Favorite Branch</span>
+                    <strong class="stat-value" style="font-size: 1.5rem; padding: 5px 0; color: var(--twins-accent-silver);">SJDM</strong>
+                    <span class="stat-subline" style="color: var(--twins-text-subtle);">90% of your total check-ins</span>
+                </article>
+            </section>
+
+            <!-- Comprehensive Detailed Logs Table -->
+            <article class="panel-card table-card" style="margin: 0;">
+                <div style="padding: 20px 20px 10px 20px;">
+                    <h2 style="margin: 0; border: none; padding: 0;">Detailed Attendance Log</h2>
+                    <p class="subtle-text" style="margin: 5px 0 0 0; font-size: 0.85rem;">Official verification timestamps generated by front-desk terminal scans.</p>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="history-table" style="min-width: 650px;">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Check In</th>
+                                <th>Check Out</th>
+                                <th>Duration</th>
+                                <th>Gym Location</th>
+                                <th style="text-align: right;">Verification Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>June 01, 2026</strong></td>
+                                <td>06:15 PM</td>
+                                <td>07:30 PM</td>
+                                <td>1h 15m</td>
+                                <td class="subtle-text">San Jose del Monte</td>
+                                <td style="text-align: right;"><span class="badge success">Verified</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>May 29, 2026</strong></td>
+                                <td>05:30 PM</td>
+                                <td>06:52 PM</td>
+                                <td>1h 22m</td>
+                                <td class="subtle-text">Novaliches</td>
+                                <td style="text-align: right;"><span class="badge success">Verified</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>May 27, 2026</strong></td>
+                                <td>06:00 PM</td>
+                                <td>07:10 PM</td>
+                                <td>1h 10m</td>
+                                <td class="subtle-text">San Jose del Monte</td>
+                                <td style="text-align: right;"><span class="badge success">Verified</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>May 25, 2026</strong></td>
+                                <td>07:10 PM</td>
+                                <td>08:15 PM</td>
+                                <td>1h 05m</td>
+                                <td class="subtle-text">San Jose del Monte</td>
+                                <td style="text-align: right;"><span class="badge success">Verified</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>May 22, 2026</strong></td>
+                                <td>06:02 PM</td>
+                                <td>07:20 PM</td>
+                                <td>1h 18m</td>
+                                <td class="subtle-text">San Jose del Monte</td>
+                                <td style="text-align: right;"><span class="badge success">Verified</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <!-- Script wiring matches previous layout rules -->
+    <script src="../../js/client-injector.js"></script>
+</body>
+</html>
