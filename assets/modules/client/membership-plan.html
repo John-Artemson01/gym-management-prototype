@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twins Fitness | My Membership Plan</title>
+    <link rel="stylesheet" href="../../css/client.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Dynamic Client Sidebar Injector Box -->
+        <aside class="sidebar" id="client-sidebar-container"></aside>
+
+        <main class="dashboard">
+            <header class="dashboard-header">
+                <div>
+                    <h1>My Membership Plan</h1>
+                    <p class="subtle-text">Review your active subscriptions, benefits, and transaction history.</p>
+                </div>
+            </header>
+
+            <!-- Grid Layout for Plan Details and Tier Packages -->
+            <div class="report-split-grid" style="margin-bottom: 24px;">
+                
+                <!-- UPDATE THIS CONTAINER ROW -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 24px;">
+                    
+                    <!-- 1. ACTIVE SUBSCRIPTION BILLING CARD -->
+                    <article class="panel-card" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 320px; margin: 0;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                                <div>
+                                    <span class="stat-label" style="text-transform: uppercase; font-size: 0.75rem;">Active Tier</span>
+                                    <h2 style="margin: 5px 0 0 0; border: none; padding: 0; font-size: 1.6rem; color: var(--twins-accent-silver);">Annual VIP Access</h2>
+                                </div>
+                                <span class="badge success">Paid</span>
+                            </div>
+                            
+                            <p class="subtle-text" style="font-size: 0.9rem; margin-bottom: 20px;">
+                                Premium all-inclusive membership package granting unrestricted access to all active club facilities.
+                            </p>
+
+                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+                                <li><span style="color: #81c784; margin-right: 8px;">✔</span> Access to all gym branches (SJDM, Nova, Lagro)</li>
+                                <li><span style="color: #81c784; margin-right: 8px;">✔</span> Priority booking for personal training clusters</li>
+                                <li><span style="color: #81c784; margin-right: 8px;">✔</span> Complimentary locker and shower station privileges</li>
+                            </ul>
+                        </div>
+
+                        <div style="border-top: 1px solid var(--twins-border); padding-top: 15px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span class="stat-label" style="font-size: 0.75rem; text-transform: uppercase;">Amount Paid</span>
+                                <div style="font-weight: bold; font-size: 1.2rem; color: var(--twins-text-primary);">₱12,000</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <span class="stat-label" style="font-size: 0.75rem; text-transform: uppercase;">Renews On</span>
+                                <div style="font-weight: bold; font-size: 1.1rem; color: var(--twins-text-primary);">Dec 15, 2026</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 2. EXPLORE MEMBERSHIP TIERS -->
+                    <article class="panel-card" style="min-height: 320px; margin: 0;">
+                        <h2>Available Club Packages</h2>
+                        <p class="subtle-text" style="margin-top: -10px; margin-bottom: 20px; font-size: 0.85rem;">Interested in switching gears? Review our alternate tier pricing rules below.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 1px solid var(--twins-border); border-radius: 8px; background-color: rgba(255,255,255,0.01);">
+                                <div>
+                                    <strong style="display: block; font-size: 0.95rem;">1 Month Base</strong>
+                                    <span class="subtle-text" style="font-size: 0.8rem;">Standard single month gym access</span>
+                                </div>
+                                <strong style="color: var(--twins-text-primary);">₱1,500 <span class="subtle-text" style="font-size: 0.75rem; font-weight: normal;">/mo</span></strong>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 1px solid var(--twins-border); border-radius: 8px; background-color: rgba(255,255,255,0.01);">
+                                <div>
+                                    <strong style="display: block; font-size: 0.95rem;">3 Month Pro Plan</strong>
+                                    <span class="subtle-text" style="font-size: 0.8rem;">Mid-tier recurring entry package</span>
+                                </div>
+                                <strong style="color: var(--twins-text-primary);">₱4,000 <span class="subtle-text" style="font-size: 0.75rem; font-weight: normal;">/3mos</span></strong>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 1px solid var(--twins-accent-red); border-radius: 8px; background-color: rgba(177, 50, 44, 0.05); position: relative;">
+                                <div>
+                                    <strong style="display: block; font-size: 0.95rem; color: var(--twins-text-primary);">VIP Annual Premium</strong>
+                                    <span class="subtle-text" style="font-size: 0.8rem; color: var(--twins-text-subtle);">Full 12-month tier access</span>
+                                </div>
+                                <div style="text-align: right;">
+                                    <strong style="display: block; color: var(--twins-text-primary);">₱12,000</strong>
+                                    <span class="badge success" style="font-size: 0.6rem; padding: 2px 6px; margin-top: 2px;">Your Plan</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+
+            <!-- 3. PERSONAL BILLING RECEIPTS LOG -->
+            <article class="panel-card table-card">
+                <h2 style="margin: 20px 20px 10px 20px; border: none; padding: 0;">Payment History & Invoices</h2>
+                <div class="table-responsive">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Invoice ID</th>
+                                <th>Billing Date</th>
+                                <th>Plan Package</th>
+                                <th>Payment Method</th>
+                                <th style="text-align: right;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>INV-2025-0941</strong></td>
+                                <td>December 15, 2025</td>
+                                <td>Annual VIP Access (Renewal)</td>
+                                <td class="subtle-text">GCash</td>
+                                <td style="text-align: right; font-weight: bold; color: #81c784;">₱12,000.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>INV-2024-0812</strong></td>
+                                <td>December 14, 2024</td>
+                                <td>Annual VIP Access (Initial)</td>
+                                <td class="subtle-text">Cash (SJDM Front Desk)</td>
+                                <td style="text-align: right; font-weight: bold; color: #81c784;">₱12,000.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <!-- Script wiring matches client dashboard rules -->
+    <script src="../../js/client-injector.js"></script>
+</body>
+</html>
