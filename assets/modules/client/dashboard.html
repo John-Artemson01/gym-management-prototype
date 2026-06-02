@@ -8,19 +8,8 @@
 </head>
 <body>
     <div class="dashboard-layout">
-        <!-- Simplified Member Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-brand">
-                <span>Twins</span>
-                <small>Fitness Club</small>
-            </div>
-            <nav class="sidebar-nav" aria-label="Main navigation">
-                <a class="sidebar-link is-active" href="#">My Dashboard</a>
-                <a class="sidebar-link" href="#">Membership Plan</a>
-                <a class="sidebar-link" href="#">Attendance History</a>
-                <a class="sidebar-link" href="#">Account Settings</a>
-            </nav>
-        </aside>
+        <!-- Dynamic Client Sidebar Injector Box -->
+        <aside class="sidebar" id="client-sidebar-container"></aside>
 
         <main class="dashboard">
             <header class="dashboard-header">
@@ -31,12 +20,10 @@
             </header>
 
             <section class="member-grid">
-                
                 <!-- Digital QR Pass -->
                 <article class="panel-card digital-pass-card">
                     <h2>Digital Access Pass</h2>
                     <div class="qr-container">
-                        <!-- Placeholder QR Code Generator -->
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=TwinsFitness_JohnArtemson123&color=a51c30&bgcolor=d3d3d3" alt="Member QR Code">
                     </div>
                     <div class="pass-details">
@@ -118,11 +105,22 @@
                             </tbody>
                         </table>
                     </div>
-                    <button class="btn-check-in mt-3" style="width: 100%;">View Full History</button>
+                    <button class="btn-check-in mt-3" style="width: 100%;" onclick="window.location.href='attendance-history.html'">View Full History</button>
                 </article>
-
             </section>
         </main>
     </div>
+
+    <!-- Script wiring -->
+    <script src="../../js/client-injector.js"></script>
+
+    <script>
+		const cacheBust = Date.now();
+		document.querySelectorAll('link[rel="stylesheet"]').forEach((link) => {
+			const url = new URL(link.getAttribute('href'), window.location.href);
+			url.searchParams.set('v', cacheBust);
+			link.setAttribute('href', url.toString());
+		});
+	</script>
 </body>
 </html>
