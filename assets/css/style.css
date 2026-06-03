@@ -884,3 +884,97 @@ select.input-control {
         padding-left: 0;
     }
 }
+
+/* --- Two-Column Form Row Layout --- */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px; /* Uniform spacing between adjacent input groups */
+    width: 100%;
+}
+
+/* Mobile responsive collapse for narrow mobile phones */
+@media (max-width: 550px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+}
+
+/* --- Exact Module Permissions Style from image_d8ea5c.png --- */
+.permissions-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--twins-text-subtle);
+    margin: 0 0 16px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--twins-border);
+    font-weight: 600;
+}
+
+.permissions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px; /* Precise horizontal and vertical spacing grid layout */
+    margin-bottom: 0;
+}
+
+.permission-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    background-color: #141314; /* Inset dark card contrast block */
+    border: 1px solid var(--twins-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.permission-item:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    background-color: #171617;
+}
+
+/* Red Checkbox Accent Controls */
+.permission-item input[type="checkbox"] {
+    accent-color: var(--twins-accent-red);
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.permission-label-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.permission-label-group strong {
+    font-size: 0.9rem;
+    color: var(--twins-text-primary);
+    font-weight: 700;
+}
+
+.permission-label-group span {
+    font-size: 0.75rem;
+    color: var(--twins-text-subtle);
+    line-height: 1.3;
+}
+
+/* Full width assignment mapping for the trailing layout entry */
+.permission-item.full-width {
+    grid-column: span 2;
+}
+
+/* Responsive collapse rules for small touch screens */
+@media (max-width: 600px) {
+    .permissions-grid {
+        grid-template-columns: 1fr;
+    }
+    .permission-item.full-width {
+        grid-column: span 1;
+    }
+}
