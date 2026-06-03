@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twins Fitness | Find a Branch</title>
+    <link rel="stylesheet" href="../../css/client.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        /* Split layout layout: Map on Left, Branch Cards Stacked on Right */
+        .locator-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 24px;
+            height: calc(100vh - 180px); /* Locks sizing neatly into the viewport view */
+            min-height: 500px;
+        }
+
+        .map-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #branchMap {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            border: 1px solid var(--twins-border);
+            background-color: var(--twins-bg-primary);
+        }
+
+        /* Scrollable list column exactly like your screenshot */
+        .branch-cards-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: auto;
+            height: 100%;
+            padding-right: 8px;
+        }
+
+        .branch-info-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .branch-info-list li {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Customizing Leaflet internal popups to match our premium dark mode styling */
+        .leaflet-popup-content-wrapper {
+            background-color: var(--twins-bg-panel) !important;
+            color: var(--twins-text-primary) !important;
+            border: 1px solid var(--twins-border);
+            font-family: inherit;
+        }
+        .leaflet-popup-tip {
+            background-color: var(--twins-bg-panel) !important;
+        }
+
+        /* Responsive Breakpoints: Stack map vertically on smaller displays */
+        @media (max-width: 900px) {
+            .locator-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            .map-wrapper {
+                height: 350px;
+            }
+            .branch-cards-list {
+                height: auto;
+                overflow-y: visible;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar" id="client-sidebar-container"></aside>
+
+        <main class="dashboard" style="display: flex; flex-direction: column;">
+            <header class="dashboard-header" style="margin-bottom: 20px;">
+                <div>
+                    <h1>Find a Branch</h1>
+                    <p class="subtle-text">Locate an active facility near you and map your next workout routing.</p>
+                </div>
+            </header>
+
+            <div class="locator-container">
+                
+                <div class="map-wrapper">
+                    <div id="branchMap"></div>
+                </div>
+
+                <div class="branch-cards-list">
+                    
+                    <article class="panel-card" style="margin: 0; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <h2 style="margin: 0; border: none; padding: 0; font-size: 1.25rem;">San Jose del Monte</h2>
+                            <span class="badge success">Active</span>
+                        </div>
+                        
+                        <ul class="branch-info-list">
+                            <li><span>📍</span> <span>Muzon Central, San Jose del Monte, Bulacan</span></li>
+                            <li><span>⏰</span> <span class="subtle-text">Mon - Fri: 6AM - 9PM (Weekends until 5PM)</span></li>
+                        </ul>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Muzon+Central+San+Jose+del+Monte+Bulacan" target="_blank" class="btn-check-in" style="display: block; text-align: center; text-decoration: none; font-size: 0.85rem; padding: 10px;">View on Google Maps</a>
+                    </article>
+
+                    <article class="panel-card" style="margin: 0; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <h2 style="margin: 0; border: none; padding: 0; font-size: 1.25rem;">Novaliches</h2>
+                            <span class="badge success">Active</span>
+                        </div>
+                        
+                        <ul class="branch-info-list">
+                            <li><span>📍</span> <span>Quirino Highway, Novaliches, Quezon City</span></li>
+                            <li><span>⏰</span> <span class="subtle-text">Mon - Fri: 6AM - 9PM (Weekends until 5PM)</span></li>
+                        </ul>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Quirino+Highway+Novaliches+Quezon+City" target="_blank" class="btn-check-in" style="display: block; text-align: center; text-decoration: none; font-size: 0.85rem; padding: 10px;">View on Google Maps</a>
+                    </article>
+
+                    <article class="panel-card" style="margin: 0; padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <h2 style="margin: 0; border: none; padding: 0; font-size: 1.25rem;">Lagro</h2>
+                            <span class="badge success">Active</span>
+                        </div>
+                        
+                        <ul class="branch-info-list">
+                            <li><span>📍</span> <span>Greater Lagro, Near SM Fairview, Quezon City</span></li>
+                            <li><span>⏰</span> <span class="subtle-text">Mon - Fri: 6AM - 9PM (Weekends until 5PM)</span></li>
+                        </ul>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Greater+Lagro+SM+Fairview+Quezon+City" target="_blank" class="btn-check-in" style="display: block; text-align: center; text-decoration: none; font-size: 0.85rem; padding: 10px;">View on Google Maps</a>
+                    </article>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../js/client-injector.js"></script>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // 1. Initialize map view centered generally around your gym branch coordinates
+        const map = L.map('branchMap').setView([14.7550, 121.0500], 12);
+
+        // 2. Load CartoDB beautiful 'Dark Matter' map vector tileset (Matches your charcoal scheme)
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        // 3. Define branch geographic marker positions
+        const locations = [
+            { name: "Twins Fitness - SJDM", coords: [14.8055, 121.0445], text: "Muzon Central, SJDM" },
+            { name: "Twins Fitness - Novaliches", coords: [14.7210, 121.0535], text: "Quirino Highway, QC" },
+            { name: "Twins Fitness - Lagro", coords: [14.7375, 121.0610], text: "Greater Lagro, QC" }
+        ];
+
+        // 4. Loop array and map out interactive pins across container viewport 
+        locations.forEach(loc => {
+            L.marker(loc.coords)
+                .addTo(map)
+                .bindPopup(`<strong>${loc.name}</strong><br><span style="color:#a79a8c; font-size:0.85rem;">${loc.text}</span>`);
+        });
+    </script>
+</body>
+</html>
