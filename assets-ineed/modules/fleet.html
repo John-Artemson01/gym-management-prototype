@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iNEED Philippines | Equipment Fleet Inventory</title>
+    
+    <!-- Shared master architecture layouts -->
+    <link rel="stylesheet" href="../css/root.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <style>
+        /* Midnight Navy Palette Variables pulling from image_cd77df.jpg */
+        :root {
+            --twins-bg-primary: #080f21;   
+            --twins-bg-panel: #111a30;     
+            --twins-border: #223154;       
+            --twins-text-primary: #ffffff; /* Brilliant white readability */
+            --twins-text-subtle: #9cb3e0;  
+            --twins-accent-red: #1b63f2;   
+            --twins-button-bg: #1b63f2;
+            --twins-hover-bg: #0d46b8;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #0e1e47 0%, #080f21 70%);
+            background-attachment: fixed;
+        }
+
+        /* Inventory Condition Status Badges */
+        .badge.ready { background-color: rgba(129, 199, 132, 0.15); color: #81c784; border: 1px solid #2e7d32; }
+        .badge.allocated { background-color: rgba(27, 99, 242, 0.15); color: #7faeff; border: 1px solid #1b63f2; }
+        .badge.service { background-color: rgba(255, 183, 77, 0.15); color: #ffb74d; border: 1px solid #f57c00; }
+        
+        .panel-card, .permission-item {
+            background-color: var(--twins-bg-panel) !important;
+            border-color: var(--twins-border) !important;
+        }
+
+        .input-control {
+            background-color: #0c1324 !important;
+            border-color: var(--twins-border) !important;
+            color: #ffffff !important;
+        }
+        .input-control:focus {
+            border-color: #1b63f2 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        
+        <!-- iNEED Administration Sidebar Frame Container -->
+        <aside class="sidebar" id="sidebar-container">
+            <div class="sidebar-brand">
+                <span style="color: #ffffff;">iNEED <span style="color: #1b63f2;">PH</span></span>
+                <small>Powerhouse Supply</small>
+            </div>
+            
+            <nav class="sidebar-nav" style="margin-top: 20px; display: flex; flex-direction: column; gap: 8px;">
+                <!-- Paths backtrack safely to the root where dashboard hub is housed -->
+                <a class="sidebar-link" href="../../ineed-index.html" style="text-decoration: none; padding: 10px 12px; display: block;">Dashboard Hub</a>
+                <a class="sidebar-link is-active" href="fleet.html" style="text-decoration: none; padding: 10px 12px; display: block; background-color: rgba(27, 99, 242, 0.15); border-left: 3px solid #1b63f2;">Machinery Fleet</a>
+                <a class="sidebar-link" href="contracts.html" style="text-decoration: none; padding: 10px 12px; display: block;">Builds & Packages</a>
+                <hr style="border: none; border-top: 1px solid var(--twins-border); margin: 10px 0;">
+                <a class="sidebar-link logout-link" href="../../index.html" style="text-decoration: none; padding: 10px 12px; display: block;">← System Gateway</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN FLEET MANAGEMENT DASHBOARD VIEWPORT -->
+        <main class="dashboard">
+            <header class="dashboard-header" style="align-items: flex-start; flex-direction: column; gap: 15px;">
+                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h1>Equipment & Package Fleet</h1>
+                        <p class="subtle-text">Manage core warehouse storage, package supply distribution, and structural asset technical testing.</p>
+                    </div>
+                    <button class="btn-check-in" onclick="openModal('assetModal')">+ Register Commercial Asset</button>
+                </div>
+                
+                <!-- Advanced Stock Filtering Controls Matrix -->
+                <div class="filter-bar panel-card" style="display: flex; gap: 15px; width: 100%; padding: 15px; margin-bottom: 0;">
+                    <input type="text" class="input-control" style="flex: 2; min-width: 200px;" placeholder="Search by Model Name, SKU Serial number, or Package Tag...">
+                    
+                    <select class="input-control" style="flex: 1; min-width: 150px;">
+                        <option value="all">All Operational States</option>
+                        <option value="ready">In Stock (Ready for Setup)</option>
+                        <option value="allocated">Allocated to Active Build</option>
+                        <option value="service">Under Tech Refurbishment</option>
+                    </select>
+
+                    <select class="input-control" style="flex: 1; min-width: 150px;">
+                        <option value="all">All Classifications</option>
+                        <option value="strength">Strength & Selectorized</option>
+                        <option value="cardio">Cardio Fleets</option>
+                        <option value="weights">Olympic Plates & Bars</option>
+                    </select>
+                </div>
+            </header>
+
+            <!-- HIGH LEVEL DIRECTORY COUNTS -->
+            <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 24px;">
+                <article class="panel-card" style="padding: 20px;">
+                    <span class="stat-label">Warehouse Machine Count</span>
+                    <div style="font-size: 1.8rem; font-weight: bold; margin-top: 5px; color: #ffffff;">142 Units</div>
+                </article>
+                <article class="panel-card" style="padding: 20px;">
+                    <span class="stat-label">Gym Packages Ready</span>
+                    <div style="font-size: 1.8rem; font-weight: bold; color: #1b63f2; margin-top: 5px;">8 Bundles</div>
+                </article>
+                <article class="panel-card" style="padding: 20px;">
+                    <span class="stat-label">Units Assigned to Active Builds</span>
+                    <div style="font-size: 1.8rem; font-weight: bold; color: #81c784; margin-top: 5px;">34 Units</div>
+                </article>
+            </section>
+
+            <!-- COMPREHENSIVE ASSET RECORD SHEET -->
+            <section class="fleet-grid">
+                <article class="panel-card table-card">
+                    <div class="table-responsive">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Item SKU Code</th>
+                                    <th>Machinery Description / Model Name</th>
+                                    <th>Classification Type</th>
+                                    <th>Package Association</th>
+                                    <th>Stock State</th>
+                                    <th style="text-align: right;">Action Commands</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>EQ-TRM-8802</strong></td>
+                                    <td>Powerhouse Commercial Treadmill V2</td>
+                                    <td>Cardio Machine</td>
+                                    <td>Elite Corporate Bundle</td>
+                                    <td><span class="badge allocated">Allocated (Titan Gym)</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('assetModal')">Modify</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>EQ-SQR-0411</strong></td>
+                                    <td>Heavy-Duty Modular Squat Cage Dual Station</td>
+                                    <td>Strength System</td>
+                                    <td>Unassigned (Individual Item)</td>
+                                    <td><span class="badge ready">In Stock (12 Available)</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('assetModal')">Modify</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>EQ-CBL-1024</strong></td>
+                                    <td>Functional Selectorized Cable Crossover 4-Stack</td>
+                                    <td>Strength System</td>
+                                    <td>Full Gym Package Pro</td>
+                                    <td><span class="badge service">Tech Testing Calibration</span></td>
+                                    <td style="text-align: right;">
+                                        <button class="btn-action edit" onclick="openModal('assetModal')">Modify</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <!-- =================================================== -->
+    <!-- INLINE REINFORCED WIDE ASSET PROFILE CONFIGURATOR  -->
+    <!-- =================================================== -->
+    <div id="assetModal" class="modal-overlay">
+        <div class="modal-content panel-card" style="max-width: 950px; width: 100%;">
+            <div class="modal-header" style="margin-bottom: 24px;">
+                <h2 style="margin: 0; border: none; padding: 0; color: #ffffff;">Asset Logistics Profile</h2>
+                <button class="close-btn" onclick="closeModal('assetModal')">&times;</button>
+            </div>
+            <form id="assetForm" onsubmit="event.preventDefault(); closeModal('assetModal');">
+                
+                <!-- Side-by-side balanced horizontal split matrix layout configuration -->
+                <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 32px; align-items: start; margin-bottom: 20px;">
+                    
+                    <!-- LEFT CONTAINER SIDE: INVENTORY IDENTIFICATION CODE METRICS -->
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label style="color: #ffffff;">Machinery Model Name</label>
+                            <input type="text" class="input-control" placeholder="e.g., Heavy Duty Lat Pulldown" required>
+                        </div>
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label style="color: #ffffff;">Unique Item SKU / Asset Tag</label>
+                            <input type="text" class="input-control" placeholder="EQ-LAT-05" required>
+                        </div>
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label style="color: #ffffff;">Equipment Classification Class</label>
+                            <select class="input-control">
+                                <option value="strength">Strength & Selectorized Units</option>
+                                <option value="cardio">Commercial Cardio Machines</option>
+                                <option value="weights">Olympic Free Weights & Plates</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT CONTAINER SIDE: TECHNICAL DISPOSITION STATUS VALUES -->
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div class="permissions-title" style="margin-bottom: 0; color: var(--twins-text-subtle); border-bottom: 1px solid var(--twins-border); padding-bottom: 8px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Pricing Metrics & Logistics Allocation</div>
+                        
+                        <!-- Internal 2-Column Grid for neat parameters pairing alignment -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px;">
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <label style="color: #ffffff;">Current Inventory Condition</label>
+                                <select class="input-control">
+                                    <option value="ready">In Stock (Ready for Supply)</option>
+                                    <option value="allocated">Allocated to Active Project Build</option>
+                                    <option value="repair">Under Maintenance Check</option>
+                                </select>
+                            </div>
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <label style="color: #ffffff;">Gym Package Bundling Assignment</label>
+                                <select class="input-control">
+                                    <option value="none">Unassigned (Individual Item)</option>
+                                    <option value="elite">Elite Corporate Bundle Pack</option>
+                                    <option value="starter">Cardio Circuit Starter Set</option>
+                                </select>
+                            </div>
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <label style="color: #ffffff;">Procurement Acquisition Cost (₱)</label>
+                                <input type="number" class="input-control" placeholder="Original asset expense" required>
+                            </div>
+                            <div class="input-group" style="margin-bottom: 0;">
+                                <label style="color: #ffffff;">Target Retail Package Valuation (₱)</label>
+                                <input type="number" class="input-control" placeholder="Assigned supply catalog pricing" required>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Footer Operations controls triggers aligned neatly to the bottom right boundary -->
+                <div style="display: flex; gap: 12px; margin-top: 28px; justify-content: flex-end;">
+                    <button type="button" class="btn-check-in" style="background-color: var(--twins-border); max-width: 160px; flex: 1;" onclick="closeModal('assetModal')">Cancel</button>
+                    <button type="submit" class="btn-check-in" style="max-width: 240px; flex: 1;">Commit Asset to Warehouse</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+    </script>
+</body>
+</html>
