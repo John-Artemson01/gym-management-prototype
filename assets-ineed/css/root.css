@@ -1,0 +1,53 @@
+/* ========================================== */
+/*   TWINS ENTERPRISE GROUP - GLOBAL TOKENS   */
+/* ========================================== */
+
+:root {
+    /* Base Dark Space Surface Depth Palette */
+    --twins-bg-primary: #080f21;       /* Deep midnight navy from image_cd77df.jpg */
+    --twins-bg-panel: #111a30;         /* Deep slate-blue for dashboard panels */
+    --twins-border: #223154;           /* Refined, high-visibility steel blue border */
+    
+    /* -------------------------------------- */
+    /* HIGH-CONTRAST WHITE SPECTRUM OVERRIDES */
+    /* -------------------------------------- */
+    --twins-text-primary: #ffffff;     /* Forced pure, brilliant white for ultimate legibility */
+    --twins-text-subtle: #9cb3e0;      /* Clean ice-blue silver for secondary labels */
+    
+    /* Stark White Utility Blocks (For tiles/badges like image_cd77df.jpg) */
+    --twins-surface-white: #ffffff;    /* Pure white for solid highlight cards/badges */
+    --twins-text-on-white: #080f21;    /* Deep navy text to read cleanly inside white blocks */
+    
+    /* Core System Accent Defaults (Twins Base Theme) */
+    --twins-accent-red: #b1322c;
+    --twins-accent-silver: #ffffff;    /* Maxed out to pure white */
+    
+    /* Dedicated Dynamic Branding Options */
+    --brand-twins-red: #b1322c;
+    --brand-twins-hover: #8b1526;
+    
+    --brand-ineed-blue: #1b63f2;       /* Powerhouse Electric Blue */
+    --brand-ineed-hover: #0d46b8;
+
+    /* Interactive Element Dynamic Focus Properties */
+    --twins-button-bg: var(--brand-twins-red);
+    --twins-hover-bg: var(--brand-twins-hover);
+}
+
+/* Global Reset Optimization Core */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    /* Implements a rich, deep metallic radial glow to make white text pop */
+    background: radial-gradient(circle at top right, #0e1e47 0%, #080f21 70%);
+    background-attachment: fixed;
+    color: var(--twins-text-primary);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+}

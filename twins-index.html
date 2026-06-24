@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twins Fitness | System Login</title>
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+
+    <main class="page-split">
+        <section class="login-panel">
+            <div class="login-wrapper">
+                <div class="brand-header">
+                    <h1>Twins</h1>
+                    <p>Fitness Club</p>
+                </div>
+
+                <form id="frontendLoginForm" action="" method="POST">
+                    <div class="input-group">
+                        <label for="username">Username / Staff ID</label>
+                        <input type="text" id="username" name="username" class="input-control" placeholder="Enter your ID" required autocomplete="off">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" class="input-control" placeholder="Enter your password" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="loginBtn">Log In</button>
+                </form>
+
+                <div class="login-footer">
+                    <a href="#">Forgot Password? Contact Administrator</a>
+                </div>
+            </div>
+        </section>
+
+        <aside class="image-panel" aria-hidden="true">
+            <div class="image-overlay"></div>
+        </aside>
+    </main>
+
+    <script>
+        // Frontend-only login check
+        document.getElementById('frontendLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('loginBtn');
+            const originalText = btn.innerHTML;
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            btn.innerHTML = 'Authenticating...';
+            btn.style.opacity = '0.8';
+            btn.style.cursor = 'wait';
+
+            setTimeout(() => {
+                if (username === 'admin' && password === 'admin') {
+                    window.location.href = 'assets/modules/admin/dashboard.html';
+                    return;
+                } else if (username === 'employee' && password === 'employee') {
+                    window.location.href = 'assets/modules/employee/dashboard.html';
+                    return;
+                } else if (username === 'client' && password === 'client') {
+                    window.location.href = 'assets/modules/client/dashboard.html';
+                    return;
+                }
+
+                alert('Invalid credentials. Please try again.');
+                btn.innerHTML = originalText;
+                btn.style.opacity = '1';
+                btn.style.cursor = 'pointer';
+            }, 600);
+        });
+    </script>
+
+</body>
+</html>

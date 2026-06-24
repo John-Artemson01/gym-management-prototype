@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iNEED Philippines | Operations Dashboard</title>
+    
+    <!-- Shared application design layout engines -->
+    <link rel="stylesheet" href="assets-ineed/css/root.css">
+    <link rel="stylesheet" href="assets-ineed/css/style.css">
+    
+    <style>
+        /* Midnight Navy Palette overrides mapped directly from image_cd77df.jpg */
+        :root {
+            --twins-bg-primary: #080f21;   
+            --twins-bg-panel: #111a30;     
+            --twins-border: #223154;       
+            --twins-text-primary: #ffffff; 
+            --twins-text-subtle: #9cb3e0;  
+            --twins-accent-red: #1b63f2;   
+            --twins-button-bg: #1b63f2;
+            --twins-hover-bg: #0d46b8;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #0e1e47 0%, #080f21 70%);
+            background-attachment: fixed;
+        }
+
+        .analytics-split {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        /* Highly scannable logistics tag indicators */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .status-pill.build { background-color: rgba(100, 181, 246, 0.15); color: #64b5f6; border: 1px solid #1b63f2; }
+        .status-pill.service { background-color: rgba(255, 183, 77, 0.15); color: #ffb74d; border: 1px solid #f57c00; }
+        .status-pill.ready { background-color: rgba(129, 199, 132, 0.15); color: #81c784; border: 1px solid #2e7d32; }
+
+        @media (max-width: 900px) {
+            .analytics-split {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        
+        <!-- iNEED Commercial Sidebar Frame -->
+        <aside class="sidebar" id="sidebar-container">
+            <div class="sidebar-brand">
+                <span style="color: #ffffff;">iNEED <span style="color: #1b63f2;">PH</span></span>
+                <small>Powerhouse Supply</small>
+            </div>
+            
+            <nav class="sidebar-nav" style="margin-top: 20px; display: flex; flex-direction: column; gap: 8px;">
+                <a class="sidebar-link is-active" href="ineed-index.html" style="text-decoration: none; padding: 10px 12px; display: block; background-color: rgba(27, 99, 242, 0.15); border-left: 3px solid #1b63f2;">Dashboard Hub</a>
+                <a class="sidebar-link" href="assets-ineed/modules/fleet.html" style="text-decoration: none; padding: 10px 12px; display: block;">Machinery Fleet</a>
+                <a class="sidebar-link" href="assets-ineed/contracts.html" style="text-decoration: none; padding: 10px 12px; display: block;">Builds & Packages</a>
+                <hr style="border: none; border-top: 1px solid var(--twins-border); margin: 10px 0;">
+                <a class="sidebar-link logout-link" href="index.html" style="text-decoration: none; padding: 10px 12px; display: block;">← System Gateway</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN EXECUTIVE INTERFACE HUB -->
+        <main class="dashboard">
+            <header class="dashboard-header">
+                <div>
+                    <h1>iNEED Commercial Operations</h1>
+                    <p class="subtle-text">Turnkey installations, package distribution logistics, and asset lifecycle maintenance tracking.</p>
+                </div>
+            </header>
+
+            <!-- CORE OPERATIONS PULSE CARDS -->
+            <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 24px;">
+                <article class="panel-card" style="padding: 24px;">
+                    <span class="stat-label">Active Turnkey Smart Builds</span>
+                    <div style="font-size: 2.2rem; font-weight: 800; margin-top: 8px; color: #ffffff;">14 Ongoing</div>
+                    <p class="subtle-text" style="font-size: 0.75rem; margin-top: 6px;">Commercial fitness sites in development</p>
+                </article>
+
+                <article class="panel-card" style="padding: 24px;">
+                    <span class="stat-label">Project Build Milestone Pace</span>
+                    <div style="font-size: 2.2rem; font-weight: 800; margin-top: 8px; color: #1b63f2;">91.5%</div>
+                    <div style="width: 100%; height: 6px; background-color: var(--twins-border); border-radius: 4px; overflow: hidden; margin-top: 12px;">
+                        <div style="height: 100%; width: 91.5%; background-color: #1b63f2;"></div>
+                    </div>
+                </article>
+
+                <article class="panel-card" style="padding: 24px;">
+                    <span class="stat-label">Gross Solutions Revenue (Q2)</span>
+                    <div style="font-size: 2.2rem; font-weight: 800; margin-top: 8px; color: #81c784;">₱1.84M</div>
+                    <p class="subtle-text" style="font-size: 0.75rem; margin-top: 6px;">Package sales and commercial build fulfillment</p>
+                </article>
+
+                <article class="panel-card" style="padding: 24px;">
+                    <span class="stat-label">Pending After-Sales Support</span>
+                    <div style="font-size: 2.2rem; font-weight: 800; margin-top: 8px; color: #ffb74d;">4 Dispatches</div>
+                    <p class="subtle-text" style="font-size: 0.75rem; margin-top: 6px;">On-site machine calibrations & servicing</p>
+                </article>
+            </section>
+
+            <!-- SPLIT VIEW: LIVE DEPLOYMENTS & MACHINERY LOGISTICS -->
+            <div class="analytics-split">
+                
+                <!-- LEFT COLUMN: LIVE SHIPPING & STRUCTURAL INSTALLATION PROJECTS -->
+                <article class="panel-card table-card" style="margin: 0;">
+                    <h2 style="padding: 20px 24px 10px 24px; font-size: 1.25rem; color: #ffffff;">Active Deployments & Gym Projects</h2>
+                    <div class="table-responsive">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Project Code</th>
+                                    <th>Client / Account Target</th>
+                                    <th>Procured Gym Package</th>
+                                    <th>Operational State</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>PKG-2026-08</strong></td>
+                                    <td>Titan Gym Muzon</td>
+                                    <td>Full Elite Commercial Bundle</td>
+                                    <td><span class="status-pill build">🛠️ Core Spatial Setup</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SRV-9904-26</strong></td>
+                                    <td>Flex Fitness Bulacan</td>
+                                    <td>After-Sales Maintenance (Cables)</td>
+                                    <td><span class="status-pill service">⚙️ Tech Dispatched</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PKG-2026-11</strong></td>
+                                    <td>Alpha Elite Sports</td>
+                                    <td>Cardio Circuit Starter Set</td>
+                                    <td><span class="status-pill ready">✅ Handed Over</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PKG-2026-15</strong></td>
+                                    <td>Iron Foundry QC</td>
+                                    <td>Strength & Plate Loaded Package</td>
+                                    <td><span class="status-pill ready">✅ Handed Over</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <!-- RIGHT COLUMN: SUPPLY DISTRIBUTION MIX EXCLUSIVES -->
+                <article class="panel-card" style="margin: 0; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <h2 style="font-size: 1.25rem; margin-bottom: 6px; color: #ffffff;">Supply Inventory Breakdown</h2>
+                        <p class="subtle-text" style="margin-bottom: 20px;">Distribution of warehouse supply inventory by asset classification type.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 18px;">
+                            <div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px;">
+                                    <strong>Strength & Selectorized Units</strong>
+                                    <span class="subtle-text">64% Volume</span>
+                                </div>
+                                <div style="width: 100%; height: 6px; background-color: var(--twins-border); border-radius: 3px; overflow: hidden;">
+                                    <div style="height: 100%; width: 64%; background-color: #1b63f2;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px;">
+                                    <strong>Commercial Cardio Machines</strong>
+                                    <span class="subtle-text">24% Volume</span>
+                                </div>
+                                <div style="width: 100%; height: 6px; background-color: var(--twins-border); border-radius: 3px; overflow: hidden;">
+                                    <div style="height: 100%; width: 24%; background-color: #64b5f6;"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 6px;">
+                                    <strong>Olympic Free Weights & Rigs</strong>
+                                    <span class="subtle-text">12% Volume</span>
+                                </div>
+                                <div style="width: 100%; height: 6px; background-color: var(--twins-border); border-radius: 3px; overflow: hidden;">
+                                    <div style="height: 100%; width: 12%; background-color: var(--twins-text-subtle);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="assets-ineed/modules/fleet.html" class="btn-check-in" style="display: block; text-align: center; text-decoration: none; font-size: 0.85rem; margin-top: 24px; padding: 12px;">Manage Supply Inventory →</a>
+                </article>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>

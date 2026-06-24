@@ -3,77 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twins Fitness | System Login</title>
-    <link rel="stylesheet" href="assets/css/login.css">
+    <title>Twins Group | Enterprise Portals</title>
+    <style>
+        /* Shared core variables matching your dark dashboard architecture */
+        :root {
+            --bg-primary: #121213;
+            --bg-panel: #1e1c1e;
+            --text-primary: #e2ded9;
+            --text-subtle: #a79a8c;
+            --border: #3d3836;
+            
+            --twins-red: #b1322c;
+            --ineed-blue: #1b63f2;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .gateway-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gateway-header h1 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .gateway-header p {
+            color: var(--text-subtle);
+            font-size: 1rem;
+        }
+
+        /* Twin Card Grid System Layout */
+        .portal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .portal-card {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 380px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Top brand colored ambient glow strips */
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        /* Card specific parameters */
+        .card-twins::before { background-color: var(--twins-red); }
+        .card-ineed::before { background-color: var(--ineed-blue); }
+
+        .portal-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-twins:hover {
+            box-shadow: 0 0 30px rgba(177, 50, 44, 0.15), 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-ineed:hover {
+            box-shadow: 0 0 30px rgba(27, 99, 242, 0.15), 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .brand-logo-zone {
+            margin-bottom: 20px;
+        }
+
+        .brand-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .brand-tagline {
+            font-size: 0.85rem;
+            color: var(--text-subtle);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .portal-description {
+            font-size: 0.95rem;
+            color: var(--text-subtle);
+            line-height: 1.6;
+            margin: 24px 0;
+            max-width: 280px;
+        }
+
+        /* Action Launch Buttons */
+        .launch-btn {
+            width: 100%;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .card-twins .launch-btn {
+            background-color: var(--twins-red);
+            color: var(--text-primary);
+        }
+        .card-twins:hover .launch-btn {
+            background-color: #8b1526;
+        }
+
+        .card-ineed .launch-btn {
+            background-color: var(--ineed-blue);
+            color: #ffffff;
+        }
+        .card-ineed:hover .launch-btn {
+            background-color: #0d46b8;
+        }
+
+        /* Responsive breakdown layout for mobile displays */
+        @media (max-width: 700px) {
+            .portal-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .portal-card {
+                min-height: auto;
+                padding: 32px 24px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <main class="page-split">
-        <section class="login-panel">
-            <div class="login-wrapper">
-                <div class="brand-header">
-                    <h1>Twins</h1>
-                    <p>Fitness Club</p>
-                </div>
+    <header class="gateway-header">
+        <h1>Twins Business Ecosystem</h1>
+        <p>Select an administrative portal environment to initialize command suite</p>
+    </header>
 
-                <form id="frontendLoginForm" action="" method="POST">
-                    <div class="input-group">
-                        <label for="username">Username / Staff ID</label>
-                        <input type="text" id="username" name="username" class="input-control" placeholder="Enter your ID" required autocomplete="off">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" class="input-control" placeholder="Enter your password" required>
-                    </div>
-
-                    <button type="submit" class="btn-submit" id="loginBtn">Log In</button>
-                </form>
-
-                <div class="login-footer">
-                    <a href="#">Forgot Password? Contact Administrator</a>
-                </div>
+    <div class="portal-grid">
+        
+        <!-- MODULE 1: TWINS FITNESS HUB -->
+        <a href="twins-index.html" class="portal-card card-twins">
+            <div class="brand-logo-zone">
+                <div class="brand-title">TWINS</div>
+                <div class="brand-tagline" style="color: var(--twins-red);">Fitness Club</div>
             </div>
-        </section>
+            
+            <p class="portal-description">
+                Manage gym member directories, subscription plans, data scanner loops, and operational branch rosters.
+            </p>
+            
+            <button class="launch-btn">Launch Club Portal</button>
+        </a>
 
-        <aside class="image-panel" aria-hidden="true">
-            <div class="image-overlay"></div>
-        </aside>
-    </main>
+        <!-- MODULE 2: iNEED PHILIPPINES FLEET HUB -->
+        <a href="ineed-index.html" class="portal-card card-ineed">
+            <div class="brand-logo-zone">
+                <div class="brand-title">iNEED <span style="color: var(--ineed-blue);">PH</span></div>
+                <div class="brand-tagline">Powerhouse Supply</div>
+            </div>
+            
+            <p class="portal-description">
+                Track heavy commercial machinery fleets, corporate leasing contracts, B2B distributions, and asset maintenance logs.
+            </p>
+            
+            <button class="launch-btn">Launch Supply Portal</button>
+        </a>
 
-    <script>
-        // Frontend-only login check
-        document.getElementById('frontendLoginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const btn = document.getElementById('loginBtn');
-            const originalText = btn.innerHTML;
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-
-            btn.innerHTML = 'Authenticating...';
-            btn.style.opacity = '0.8';
-            btn.style.cursor = 'wait';
-
-            setTimeout(() => {
-                if (username === 'admin' && password === 'admin') {
-                    window.location.href = 'assets/modules/admin/dashboard.html';
-                    return;
-                } else if (username === 'employee' && password === 'employee') {
-                    window.location.href = 'assets/modules/employee/dashboard.html';
-                    return;
-                } else if (username === 'client' && password === 'client') {
-                    window.location.href = 'assets/modules/client/dashboard.html';
-                    return;
-                }
-
-                alert('Invalid credentials. Please try again.');
-                btn.innerHTML = originalText;
-                btn.style.opacity = '1';
-                btn.style.cursor = 'pointer';
-            }, 600);
-        });
-    </script>
+    </div>
 
 </body>
 </html>
